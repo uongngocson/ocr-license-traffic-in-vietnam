@@ -4,11 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VN-ANPR Enterprise | Hệ Thống Giám Sát & Nhận Diện Biển Số Trực Tiếp</title>
+  <title>Hệ Thống Giám Sát & Nhận Diện Biển Số Xe</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
   <!-- Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -106,21 +104,9 @@
     <div class="max-w-[1680px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
 
       <!-- Brand -->
-      <div class="flex items-center space-x-3.5">
-        <div
-          class="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-sky-500/20 border border-sky-400/30">
-          <i data-lucide="video" class="w-5 h-5 text-white"></i>
-        </div>
-        <div>
-          <div class="flex items-center space-x-2">
-            <span class="text-base font-bold tracking-tight text-white">VN-ANPR Enterprise</span>
-            <span
-              class="px-2 py-0.5 text-[10px] font-bold tracking-wide uppercase rounded bg-sky-500/10 text-sky-400 border border-sky-500/20">Live
-              Stream & AI</span>
-          </div>
-          <p class="text-[11px] text-slate-400 font-medium">Trung Tâm Giám Sát Phương Tiện & Nhận Diện Biển Số Thời Gian
-            Thực</p>
-        </div>
+      <div class="flex flex-col justify-center">
+        <h1 class="text-base font-bold tracking-tight text-white uppercase">Hệ Thống Nhận Diện Biển Số Xe</h1>
+        <p class="text-[11px] text-slate-400 font-medium">Giám sát phương tiện giao thông thời gian thực</p>
       </div>
 
       <!-- Mode Switcher Tabs (Live Stream vs Static Inspector) -->
@@ -128,12 +114,11 @@
         <button id="tab-mode-live"
           class="flex items-center space-x-2 px-4 py-1.5 rounded-lg text-xs font-bold bg-sky-600 text-white transition-all shadow-md">
           <span class="w-2 h-2 rounded-full bg-rose-400 live-dot"></span>
-          <span>Camera Trực Tiếp (Live Stream)</span>
+          <span>Camera Trực Tiếp</span>
         </button>
         <button id="tab-mode-static"
           class="flex items-center space-x-2 px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 transition-all">
-          <i data-lucide="image" class="w-3.5 h-3.5"></i>
-          <span>Kiểm Định Ảnh Tĩnh</span>
+          <span>Kiểm Định Ảnh</span>
         </button>
       </div>
 
@@ -141,14 +126,13 @@
       <div class="flex items-center space-x-3 text-xs">
         <div
           class="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-800/60 border border-slate-700/60 text-slate-300">
-          <i data-lucide="zap" class="w-3.5 h-3.5 text-amber-400"></i>
-          <span class="text-slate-400">FPS Mục Tiêu:</span>
-          <span class="font-mono font-bold text-amber-300">30.0 FPS</span>
+          <span class="text-slate-400">Tốc độ khung hình:</span>
+          <span class="font-mono font-bold text-amber-300">30 FPS</span>
         </div>
 
         <div
           class="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
-          <i data-lucide="activity" class="w-3.5 h-3.5"></i>
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
           <span class="font-medium" id="system-status-text">Hệ Thống Trực Tuyến</span>
         </div>
       </div>
@@ -161,44 +145,24 @@
 
     <!-- KPI Summary Ribbon -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
-      <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-3.5 flex items-center justify-between">
-        <div>
-          <p class="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Tổng Biển Số Ghi Nhận</p>
-          <p class="text-2xl font-bold text-white mt-0.5" id="kpi-plates-count">0</p>
-        </div>
-        <div class="w-9 h-9 rounded-lg bg-sky-500/10 flex items-center justify-center text-sky-400">
-          <i data-lucide="scan-line" class="w-4 h-4"></i>
-        </div>
+      <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-4">
+        <p class="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Tổng Biển Số Ghi Nhận</p>
+        <p class="text-2xl font-bold text-white mt-1" id="kpi-plates-count">0</p>
       </div>
 
-      <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-3.5 flex items-center justify-between">
-        <div>
-          <p class="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Kênh Camera Đang Hoạt Động</p>
-          <p class="text-2xl font-bold text-emerald-400 mt-0.5" id="kpi-channel-active">CAM-01</p>
-        </div>
-        <div class="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400">
-          <i data-lucide="cctv" class="w-4 h-4"></i>
-        </div>
+      <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-4">
+        <p class="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Kênh Camera Hoạt Động</p>
+        <p class="text-2xl font-bold text-emerald-400 mt-1" id="kpi-channel-active">Camera 01</p>
       </div>
 
-      <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-3.5 flex items-center justify-between">
-        <div>
-          <p class="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Độ Tin Cậy Trung Bình</p>
-          <p class="text-2xl font-bold text-indigo-400 mt-0.5">99.8%</p>
-        </div>
-        <div class="w-9 h-9 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400">
-          <i data-lucide="check-check" class="w-4 h-4"></i>
-        </div>
+      <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-4">
+        <p class="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Độ Tin Cậy Trung Bình</p>
+        <p class="text-2xl font-bold text-indigo-400 mt-1">99.8%</p>
       </div>
 
-      <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-3.5 flex items-center justify-between">
-        <div>
-          <p class="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Trạng Thái Xử Lý</p>
-          <p class="text-2xl font-bold text-sky-400 mt-0.5">Real-Time</p>
-        </div>
-        <div class="w-9 h-9 rounded-lg bg-sky-500/10 flex items-center justify-center text-sky-400">
-          <i data-lucide="cpu" class="w-4 h-4"></i>
-        </div>
+      <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-4">
+        <p class="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Trạng Thái Xử Lý</p>
+        <p class="text-2xl font-bold text-sky-400 mt-1">Thời Gian Thực</p>
       </div>
     </div>
 
@@ -212,9 +176,8 @@
         class="bg-slate-900/90 border border-slate-800/90 rounded-xl px-4 py-3 flex flex-wrap items-center justify-between gap-3 shadow-sm">
         <div class="flex items-center space-x-3 flex-1 min-w-[320px]">
           <label for="camera-select"
-            class="text-xs font-semibold text-slate-300 flex items-center space-x-1.5 whitespace-nowrap">
-            <i data-lucide="video" class="w-4 h-4 text-sky-400"></i>
-            <span>Nguồn Camera Giám Sát:</span>
+            class="text-xs font-semibold text-slate-300 whitespace-nowrap">
+            Nguồn Camera Giám Sát:
           </label>
           <select id="camera-select"
             class="bg-slate-950 border border-slate-700 text-xs rounded-lg px-3 py-1.5 text-slate-200 focus:outline-none focus:border-sky-500 transition-colors w-full max-w-md font-medium">
@@ -222,22 +185,19 @@
             <option value="traffic_2">Camera 02: Trục Lộ Đô Thị (1920x1080)</option>
           </select>
           <button id="btn-switch-cam"
-            class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-sky-600 hover:bg-sky-500 text-white transition-all whitespace-nowrap flex items-center space-x-1">
-            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
-            <span>Chuyển Kênh</span>
+            class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-sky-600 hover:bg-sky-500 text-white transition-all whitespace-nowrap">
+            Chuyển Kênh
           </button>
         </div>
 
         <div class="flex items-center space-x-2">
           <button id="btn-stream-pause"
-            class="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700/60 transition-all flex items-center space-x-1.5">
-            <i data-lucide="pause" class="w-3.5 h-3.5"></i>
+            class="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700/60 transition-all">
             <span id="btn-stream-pause-text">Tạm Dừng</span>
           </button>
           <button id="btn-clear-live-events"
-            class="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700/60 transition-all flex items-center space-x-1.5">
-            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-            <span>Làm sạch thẻ</span>
+            class="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700/60 transition-all">
+            Xóa Danh Sách
           </button>
         </div>
       </div>
@@ -283,21 +243,18 @@
         <div
           class="lg:col-span-4 bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-2xl space-y-3 flex flex-col">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
-            <div class="flex items-center space-x-2">
-              <i data-lucide="radio" class="w-4 h-4 text-rose-400 live-dot"></i>
-              <h2 class="text-xs font-bold text-white uppercase tracking-wider">Biển Số Vừa Nhận Diện</h2>
-            </div>
+            <h2 class="text-xs font-bold text-white uppercase tracking-wider">Biển Số Vừa Nhận Diện</h2>
             <span class="text-[10px] font-mono text-slate-500" id="live-feed-clock">--:--:--</span>
           </div>
 
           <!-- Real-Time Plate Statistics Breakdown Bar -->
           <div class="grid grid-cols-3 gap-1.5 py-1 text-center font-mono text-[11px]">
             <div class="bg-slate-950/80 border border-slate-800 rounded-lg p-1.5">
-              <span class="text-[10px] text-slate-400 block font-sans">Biển Dài (1 dòng)</span>
+              <span class="text-[10px] text-slate-400 block font-sans">Biển Dài</span>
               <strong id="count-long-plates" class="text-sky-400 text-xs">0</strong>
             </div>
             <div class="bg-slate-950/80 border border-slate-800 rounded-lg p-1.5">
-              <span class="text-[10px] text-slate-400 block font-sans">Biển Vuông (2 dòng)</span>
+              <span class="text-[10px] text-slate-400 block font-sans">Biển Vuông</span>
               <strong id="count-square-plates" class="text-emerald-400 text-xs">0</strong>
             </div>
             <div class="bg-slate-950/80 border border-slate-800 rounded-lg p-1.5">
@@ -308,8 +265,6 @@
 
           <!-- Empty Standby Notice -->
           <div id="live-feed-empty" class="text-center py-16 text-slate-500">
-            <i data-lucide="radar" class="w-10 h-10 mx-auto mb-2 text-slate-700 animate-spin"
-              style="animation-duration: 4s;"></i>
             <p class="text-xs font-medium text-slate-400">Đang quét nhận diện biển số...</p>
             <p class="text-[11px] text-slate-600 mt-1">Biển số nhận diện sẽ xuất hiện theo thời gian thực</p>
           </div>
@@ -329,38 +284,29 @@
     <!-- ========================================================================= -->
     <div id="section-static-inspector" class="hidden space-y-5">
 
-
       <!-- Static Image Inspection Workspace Grid -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
         <div class="lg:col-span-7 space-y-4">
           <div id="drop-zone"
-            class="relative group cursor-pointer border-2 border-dashed border-slate-700/80 hover:border-sky-500/80 bg-slate-900/60 hover:bg-slate-900/90 rounded-2xl p-5 text-center transition-all duration-200">
+            class="relative group cursor-pointer border-2 border-dashed border-slate-700/80 hover:border-sky-500/80 bg-slate-900/60 hover:bg-slate-900/90 rounded-2xl p-6 text-center transition-all duration-200">
             <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/bmp" class="hidden">
-            <div class="flex items-center justify-center space-x-4 pointer-events-none">
-              <div
-                class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center group-hover:scale-105 group-hover:bg-sky-500/20 transition-all">
-                <i data-lucide="upload-cloud" class="w-6 h-6"></i>
-              </div>
-              <div class="text-left">
-                <p class="text-sm font-semibold text-slate-200">
-                  Nhấp để nạp tệp ảnh chứa biển số xe, hoặc kéo & thả vào khung này
-                </p>
-                <p class="text-xs text-slate-400 mt-0.5">
-                  Hỗ trợ JPG, PNG, WEBP, BMP. Có thể dán trực tiếp <kbd
-                    class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-[10px] text-slate-300 font-mono">Ctrl
-                    + V</kbd>
-                </p>
-              </div>
+            <div class="pointer-events-none space-y-1">
+              <p class="text-sm font-semibold text-slate-200">
+                Nhấp để chọn tệp ảnh chứa biển số xe, hoặc kéo & thả vào khung này
+              </p>
+              <p class="text-xs text-slate-400">
+                Hỗ trợ định dạng JPG, PNG, WEBP, BMP. Có thể dán trực tiếp <kbd
+                  class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-[10px] text-slate-300 font-mono">Ctrl
+                  + V</kbd>
+              </p>
             </div>
           </div>
 
           <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
             <div class="px-4 py-3 border-b border-slate-800 flex items-center justify-between bg-slate-900/90">
               <div class="flex items-center space-x-2">
-                <span
-                  class="text-xs font-semibold text-slate-300 uppercase tracking-wider flex items-center space-x-1.5">
-                  <i data-lucide="camera" class="w-4 h-4 text-sky-400"></i>
-                  <span>Khung Hình Phân Tích</span>
+                <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                  Khung Hình Phân Tích
                 </span>
                 <span id="canvas-resolution-badge"
                   class="hidden px-2 py-0.5 text-[10px] font-mono rounded bg-slate-800 text-slate-400 border border-slate-700">0x0</span>
@@ -369,23 +315,20 @@
                 <div class="inline-flex p-0.5 rounded-lg bg-slate-950 border border-slate-800 text-xs">
                   <button id="btn-view-annotated"
                     class="px-3 py-1 rounded-md font-semibold bg-sky-600 text-white transition-all shadow-sm">
-                    Khung Bounding Box
+                    Ảnh Đã Nhận Diện
                   </button>
                   <button id="btn-view-original"
                     class="px-3 py-1 rounded-md font-semibold text-slate-400 hover:text-slate-200 transition-all">
-                    Ảnh Quang Học Gốc
+                    Ảnh Gốc
                   </button>
                 </div>
                 <button id="btn-download-result" disabled
-                  title="Tải ảnh kết quả"
-                  class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all">
-                  <i data-lucide="download" class="w-4 h-4"></i>
+                  class="px-2.5 py-1 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all text-xs font-medium border border-slate-700/60">
+                  Tải Ảnh
                 </button>
                 <button id="btn-reset"
-                  title="Làm mới không gian kiểm định"
-                  class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-rose-950 hover:text-rose-300 text-slate-400 border border-slate-700/60 transition-all flex items-center space-x-1 text-xs font-medium">
-                  <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
-                  <span>Làm mới</span>
+                  class="px-2.5 py-1 rounded-md bg-slate-800 hover:bg-rose-950 hover:text-rose-300 text-slate-400 border border-slate-700/60 transition-all text-xs font-medium">
+                  Làm Mới
                 </button>
               </div>
             </div>
@@ -393,11 +336,7 @@
             <div
               class="relative bg-slate-950 min-h-[420px] max-h-[560px] flex items-center justify-center p-3 overflow-hidden select-none">
               <div id="stage-placeholder" class="text-center py-20 px-4">
-                <div
-                  class="w-16 h-16 mx-auto mb-3 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-center text-slate-600">
-                  <i data-lucide="scan-line" class="w-8 h-8"></i>
-                </div>
-                <p class="text-sm text-slate-300 font-semibold">Khu vực hiển thị hình ảnh giám sát</p>
+                <p class="text-sm text-slate-300 font-semibold">Khu vực hiển thị hình ảnh</p>
                 <p class="text-xs text-slate-500 mt-1">Hệ thống đang chờ tệp ảnh đầu vào</p>
               </div>
 
@@ -405,8 +344,8 @@
                 class="hidden absolute inset-0 bg-slate-950/85 backdrop-blur-sm z-30 flex flex-col items-center justify-center space-y-3">
                 <div class="w-11 h-11 border-4 border-sky-500/20 border-t-sky-500 rounded-full animate-spin"></div>
                 <div class="text-center">
-                  <p class="text-sm font-semibold text-white">Đang thực hiện phân tích ONNX...</p>
-                  <p class="text-xs text-slate-400 mt-0.5">Xử lý YOLOv9 & CCT-XS trên CPU</p>
+                  <p class="text-sm font-semibold text-white">Đang phân tích hình ảnh...</p>
+                  <p class="text-xs text-slate-400 mt-0.5">Hệ thống đang trích xuất và nhận diện biển số</p>
                 </div>
               </div>
 
@@ -421,10 +360,7 @@
         <div class="lg:col-span-5 space-y-4">
           <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
             <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-              <div class="flex items-center space-x-2">
-                <i data-lucide="clipboard-list" class="w-4 h-4 text-sky-400"></i>
-                <h2 class="text-sm font-bold text-white uppercase tracking-wider">Hồ Sơ Nhận Diện Phương Tiện</h2>
-              </div>
+              <h2 class="text-sm font-bold text-white uppercase tracking-wider">Hồ Sơ Nhận Diện Phương Tiện</h2>
               <span id="detected-counter-badge"
                 class="px-2 py-0.5 text-xs font-mono font-bold rounded-full bg-slate-800 text-slate-300 border border-slate-700">
                 0 Phương Tiện
@@ -432,9 +368,8 @@
             </div>
 
             <div id="inspector-standby" class="text-center py-16 text-slate-500">
-              <i data-lucide="shield" class="w-10 h-10 mx-auto mb-2 text-slate-700"></i>
               <p class="text-xs font-medium">Chưa có dữ liệu phương tiện</p>
-              <p class="text-[11px] text-slate-600 mt-1">Kết quả phân tích chi tiết sẽ được tự động trích xuất</p>
+              <p class="text-[11px] text-slate-600 mt-1">Kết quả phân tích chi tiết sẽ hiển thị tại đây</p>
             </div>
 
             <div id="inspector-cards" class="space-y-4 max-h-[520px] overflow-y-auto pr-1 custom-scroll"></div>
@@ -449,15 +384,10 @@
     <!-- ========================================================================= -->
     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-3.5">
       <div class="flex items-center justify-between">
-        <div class="flex items-center space-x-2">
-          <i data-lucide="history" class="w-4 h-4 text-sky-400"></i>
-          <h3 class="text-sm font-bold text-white uppercase tracking-wider">Nhật Ký Giám Sát Phương Tiện (Real-Time
-            Audit Log)</h3>
-        </div>
+        <h3 class="text-sm font-bold text-white uppercase tracking-wider">Nhật Ký Giám Sát Phương Tiện</h3>
         <button id="btn-clear-audit"
-          class="text-xs text-slate-500 hover:text-slate-300 transition-colors flex items-center space-x-1">
-          <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-          <span>Xóa nhật ký</span>
+          class="text-xs text-slate-500 hover:text-slate-300 transition-colors">
+          Xóa nhật ký
         </button>
       </div>
 
@@ -468,11 +398,11 @@
             <tr>
               <th class="py-3 px-4">Mã Ghi Nhận</th>
               <th class="py-3 px-4">Thời Điểm</th>
-              <th class="py-3 px-4">Ảnh Trích Xuất (Crop)</th>
+              <th class="py-3 px-4">Ảnh Cắt Biển Số</th>
               <th class="py-3 px-4">Biển Số Nhận Diện</th>
               <th class="py-3 px-4">Phân Loại Biển</th>
               <th class="py-3 px-4">Khu Vực</th>
-              <th class="py-3 px-4">Độ Tin Cậy OCR</th>
+              <th class="py-3 px-4">Độ Tin Cậy</th>
               <th class="py-3 px-4">Trạng Thái</th>
               <th class="py-3 px-4 text-right">Thao Tác</th>
             </tr>
@@ -492,10 +422,7 @@
   <!-- Toast -->
   <div id="toast"
     class="fixed bottom-6 right-6 z-50 transform transition-all duration-300 translate-y-20 opacity-0 pointer-events-none flex items-center space-x-2.5 px-4 py-3 rounded-xl bg-slate-900/95 border border-slate-700 text-sm text-white shadow-2xl backdrop-blur-md">
-    <div id="toast-icon-container"
-      class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
-      <i data-lucide="check" class="w-3.5 h-3.5"></i>
-    </div>
+    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
     <span id="toast-text" class="font-medium">Thông báo</span>
   </div>
 
@@ -558,8 +485,6 @@
     const detectedCounterBadge = document.getElementById('detected-counter-badge');
     const btnReset = document.getElementById('btn-reset');
 
-    lucide.createIcons();
-
     // Clock
     setInterval(() => {
       liveFeedClock.textContent = new Date().toLocaleTimeString('vi-VN');
@@ -599,13 +524,13 @@
     function setCameraSource(camId) {
       store.currentCamera = camId;
       liveStreamImg.src = `/api/stream/live?source=${camId}&t=${Date.now()}`;
-      kpiChannelActive.textContent = camId.toUpperCase().replace('_', '-');
+      kpiChannelActive.textContent = camId === 'traffic_1' ? 'Camera 01' : 'Camera 02';
       const titleMap = {
-        'traffic_1': 'Camera 01: Nút Giao Ngã Tư Thực Tế (1280x720) - 30 FPS',
-        'traffic_2': 'Camera 02: Trục Lộ Đô Thị (1920x1080) - 30 FPS'
+        'traffic_1': 'Camera 01: Nút Giao Ngã Tư - 30 FPS',
+        'traffic_2': 'Camera 02: Trục Lộ Đô Thị - 30 FPS'
       };
       streamHeaderTitle.textContent = titleMap[camId] || 'Luồng Video Trực Tiếp';
-      notify(`Đã chuyển kênh sang ${camId.toUpperCase()}`);
+      notify(`Đã chuyển kênh sang ${camId === 'traffic_1' ? 'Camera 01' : 'Camera 02'}`);
     }
 
     btnSwitchCam.addEventListener('click', () => {
@@ -675,9 +600,9 @@
       card.innerHTML = `
         <div class="flex items-center justify-between">
           <div class="flex items-center space-x-2">
-            <span class="w-5 h-5 rounded bg-sky-500/20 text-sky-400 font-mono text-[11px] flex items-center justify-center font-bold">#${data.track_id}</span>
+            <span class="px-2 py-0.5 rounded bg-sky-500/20 text-sky-400 font-mono text-[11px] font-bold">#${data.track_id}</span>
             ${getPlateTypeBadge(ptype)}
-            <span class="px-2 py-0.5 rounded text-[10px] font-mono text-slate-400 bg-slate-800/80 border border-slate-700/60">${data.region || 'Vietnam'}</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono text-slate-400 bg-slate-800/80 border border-slate-700/60">${data.region === 'Vietnam' ? 'Việt Nam' : (data.region || 'Việt Nam')}</span>
           </div>
           <span class="font-mono text-[11px] text-slate-400">${data.timestamp}</span>
         </div>
@@ -689,19 +614,18 @@
           <div class="flex-1 text-center">
             <span class="plate-badge-rect inline-block px-3 py-1 text-base font-mono">${data.plate}</span>
           </div>
-          <button onclick="navigator.clipboard.writeText('${data.plate}'); notify('Đã sao chép: ${data.plate}');" class="p-1 rounded text-slate-400 hover:text-white" title="Sao chép">
-            <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+          <button onclick="navigator.clipboard.writeText('${data.plate}'); notify('Đã sao chép: ${data.plate}');" class="px-2 py-1 rounded text-xs text-slate-400 hover:text-white bg-slate-800 border border-slate-700/60 transition-all">
+            Sao chép
           </button>
         </div>
 
         <div class="flex items-center justify-between text-[11px] text-slate-400 pt-1">
-          <span>Độ tin cậy OCR: <strong class="text-emerald-400 font-mono">${ocrPct}%</strong></span>
+          <span>Độ tin cậy: <strong class="text-emerald-400 font-mono">${ocrPct}%</strong></span>
           <span class="text-sky-400 font-semibold">Đã xác thực</span>
         </div>
       `;
 
       liveFeedContainer.prepend(card);
-      lucide.createIcons();
 
       // Add to unified Audit Table
       addAuditRow({
@@ -710,7 +634,7 @@
         cropImg: data.crop_image || '',
         plateText: data.plate,
         plateType: ptype,
-        region: data.region || 'Vietnam',
+        region: data.region === 'Vietnam' ? 'Việt Nam' : (data.region || 'Việt Nam'),
         confidence: `${ocrPct}%`,
         status: 'Trực tiếp'
       });
@@ -738,7 +662,7 @@
           <td class="py-2.5 px-4 font-mono text-slate-400 font-medium">${item.id}</td>
           <td class="py-2.5 px-4 font-mono text-slate-400">${item.timestamp}</td>
           <td class="py-2.5 px-4">
-            ${item.cropImg ? `<img src="${item.cropImg}" class="h-7 w-auto max-w-[90px] object-cover rounded border border-slate-700 shadow-sm">` : 'N/A'}
+            ${item.cropImg ? `<img src="${item.cropImg}" class="h-7 w-auto max-w-[90px] object-cover rounded border border-slate-700 shadow-sm">` : 'Không có'}
           </td>
           <td class="py-2.5 px-4 font-mono font-bold text-white text-sm">${item.plateText}</td>
           <td class="py-2.5 px-4">${getPlateTypeBadge(item.plateType)}</td>
@@ -746,13 +670,12 @@
           <td class="py-2.5 px-4 font-mono text-emerald-400 font-semibold">${item.confidence}</td>
           <td class="py-2.5 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Đã kiểm duyệt</span></td>
           <td class="py-2.5 px-4 text-right">
-            <button onclick="navigator.clipboard.writeText('${item.plateText}'); notify('Đã sao chép: ${item.plateText}');" class="p-1 rounded text-slate-400 hover:text-white hover:bg-slate-800 transition-all" title="Sao chép">
-              <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+            <button onclick="navigator.clipboard.writeText('${item.plateText}'); notify('Đã sao chép: ${item.plateText}');" class="px-2 py-1 rounded text-xs text-slate-400 hover:text-white bg-slate-800 border border-slate-700/60 transition-all">
+              Sao chép
             </button>
           </td>
         </tr>
       `).join('');
-      lucide.createIcons();
     }
 
     btnClearAudit.addEventListener('click', () => {
@@ -833,20 +756,22 @@
         card.innerHTML = `
           <div class="flex items-center justify-between">
             <span class="text-xs font-bold text-slate-200">#${idx + 1} ${p.plate_type || 'Biển Số'}</span>
-            <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/10 text-emerald-400">${p.region || 'Vietnam'}</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/10 text-emerald-400">${p.region === 'Vietnam' ? 'Việt Nam' : (p.region || 'Việt Nam')}</span>
           </div>
           <div class="flex items-center space-x-3 bg-slate-900/60 p-2.5 rounded-lg">
             ${p.crop_image ? `<img src="${p.crop_image}" class="h-10 w-auto max-w-[100px] object-cover rounded border border-slate-700">` : ''}
             <div class="flex-1 text-center"><span class="plate-badge-rect inline-block px-3 py-1 text-base font-mono">${p.text}</span></div>
+            <button onclick="navigator.clipboard.writeText('${p.text}'); notify('Đã sao chép: ${p.text}');" class="px-2 py-1 rounded text-xs text-slate-400 hover:text-white bg-slate-800 border border-slate-700/60 transition-all">
+              Sao chép
+            </button>
           </div>
           <div class="text-xs text-slate-400 flex justify-between">
-            <span>OCR: <strong class="text-emerald-400 font-mono">${ocrPct}%</strong></span>
-            <span>Detect: <strong class="text-sky-400 font-mono">${detPct}%</strong></span>
+            <span>Độ tin cậy: <strong class="text-emerald-400 font-mono">${ocrPct}%</strong></span>
+            <span>Phát hiện: <strong class="text-sky-400 font-mono">${detPct}%</strong></span>
           </div>
         `;
         inspectorCards.appendChild(card);
       });
-      lucide.createIcons();
     }
 
     btnViewAnnotated.addEventListener('click', () => {
