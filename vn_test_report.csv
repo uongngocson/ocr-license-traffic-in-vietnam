@@ -1,0 +1,78 @@
+﻿STT,Tên file,Nguồn,Phân loại,Kích thước,Số biển phát hiện,Danh sách biển số,Độ tin cậy Detect,Độ tin cậy OCR,Vùng,Thời gian CPU (ms),Trạng thái
+1,mrzaizai2k_1.1.PNG,mrzaizai2k,Xe hơi & Xe máy đường phố,268x177,1,61T32222,70.0%,99.9%,Vietnam,107.6,THÀNH CÔNG
+2,mrzaizai2k_1.jpg,mrzaizai2k,Xe hơi & Xe máy đường phố,800x600,1,61T32222,90.6%,99.9%,Vietnam,144.9,THÀNH CÔNG
+3,mrzaizai2k_10.jpg,mrzaizai2k,Xe hơi & Xe máy đường phố,1920x1080,3,"81K53579, 67F22113, 81AA04892","90.1%, 88.1%, 84.6%","100.0%, 95.2%, 100.0%",Vietnam,169.4,THÀNH CÔNG
+4,mrzaizai2k_11.jpg,mrzaizai2k,Xe hơi & Xe máy đường phố,1920x1080,2,"61F102330, ","88.8%, 56.9%","99.9%, 99.9%","Unknown, Vietnam",139.3,THÀNH CÔNG
+5,mrzaizai2k_12.jpg,mrzaizai2k,Xe hơi & Xe máy đường phố,1920x1080,2,"49E164481, 86B137449","87.4%, 79.1%","100.0%, 100.0%",Vietnam,1135.8,THÀNH CÔNG
+6,mrzaizai2k_13.jpg,mrzaizai2k,Xe hơi & Xe máy đường phố,1920x1080,2,", 86B137449","87.8%, 87.7%","100.0%, 100.0%","Unknown, Vietnam",124.7,THÀNH CÔNG
+7,mrzaizai2k_14.jpg,mrzaizai2k,Xe hơi & Xe máy đường phố,1920x1080,3,"49019BD, 1K8886, 71B155794","91.6%, 91.3%, 89.3%","100.0%, 75.5%, 100.0%","Czech Republic, Vietnam",157.8,THÀNH CÔNG
+8,mrzaizai2k_15.jpg,mrzaizai2k,Xe hơi & Xe máy đường phố,1280x720,2,"78H104652, 47K117349","89.9%, 89.1%","100.0%, 100.0%",Vietnam,109.2,THÀNH CÔNG
+9,mrzaizai2k_16.jpg,mrzaizai2k,Xe hơi & Xe máy đường phố,1920x1080,3,"66P189575, 75H135792, 84B136217","89.1%, 88.3%, 85.8%","100.0%, 99.7%, 99.9%",Vietnam,113.1,THÀNH CÔNG
+10,mrzaizai2k_17.jpg,mrzaizai2k,Xe hơi & Xe máy đường phố,1920x1080,3,"66P189575, 84B136217, 75H135792","89.8%, 85.5%, 84.8%","100.0%, 99.9%, 100.0%",Vietnam,123.5,THÀNH CÔNG
+11,mrzaizai2k_19.jpg,mrzaizai2k,Xe hơi & Xe máy đường phố,1920x1080,1,51H04073,89.7%,100.0%,Vietnam,102.4,THÀNH CÔNG
+12,mrzaizai2k_2.1.png,mrzaizai2k,Xe hơi & Xe máy đường phố,571x195,2,"61T32222, 59V179379","92.5%, 88.5%","100.0%, 100.0%",Vietnam,104.6,THÀNH CÔNG
+13,mrzaizai2k_2.jpg,mrzaizai2k,Xe hơi & Xe máy đường phố,259x194,1,59V179379,86.2%,99.9%,Vietnam,110.6,THÀNH CÔNG
+14,mrzaizai2k_20.jpg,mrzaizai2k,Xe hơi & Xe máy đường phố,1920x1080,1,51G68882,90.8%,100.0%,Vietnam,124.4,THÀNH CÔNG
+15,mrzaizai2k_21.jpg,mrzaizai2k,Xe hơi & Xe máy đường phố,1920x1080,1,51F70804,90.2%,100.0%,Vietnam,97.2,THÀNH CÔNG
+16,mrzaizai2k_22.jpg,mrzaizai2k,Xe hơi & Xe máy đường phố,1920x1080,1,51H32116,90.6%,100.0%,Vietnam,111.2,THÀNH CÔNG
+17,mrzaizai2k_3.jpg,mrzaizai2k,Xe hơi & Xe máy đường phố,1920x1080,2,"66P189575, 84B136217","88.2%, 87.4%","100.0%, 100.0%",Vietnam,131.9,THÀNH CÔNG
+18,mrzaizai2k_8.1.jpg,mrzaizai2k,Xe hơi & Xe máy đường phố,1920x1080,1,51G79984,91.2%,100.0%,Vietnam,1001.2,THÀNH CÔNG
+19,mrzaizai2k_9.2.jpg,mrzaizai2k,Xe hơi & Xe máy đường phố,1280x960,1,60A55655,90.1%,100.0%,Vietnam,563.2,THÀNH CÔNG
+20,mrzaizai2k_9.jpg,mrzaizai2k,Xe hơi & Xe máy đường phố,1280x720,2,"60B933994, LDZ09","85.8%, 81.1%","100.0%, 69.7%","Belgium, Vietnam",226.5,THÀNH CÔNG
+21,NamYCM_img_0.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,750x500,1,B58BPS,91.4%,100.0%,Romania,118.1,THÀNH CÔNG
+22,NamYCM_img_1.png,NamYCM_img,Ô tô & Xe máy đa góc độ,1024x768,1,PNYEXPS,91.0%,100.0%,United States,131.3,THÀNH CÔNG
+23,NamYCM_img_2.png,NamYCM_img,Ô tô & Xe máy đa góc độ,1024x768,1,EZEY,87.5%,100.0%,United States,121.1,THÀNH CÔNG
+24,NamYCM_img_3.png,NamYCM_img,Ô tô & Xe máy đa góc độ,768x1024,1,GAY247,93.1%,100.0%,New Zealand,81.4,THÀNH CÔNG
+25,NamYCM_img_4.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,1422x800,1,30F10673,89.9%,99.9%,Vietnam,125.6,THÀNH CÔNG
+26,NamYCM_img_5.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,690x518,1,49A18955,88.2%,99.7%,Vietnam,106.0,THÀNH CÔNG
+27,NamYCM_img_choi.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,686x549,1,69N126779,92.0%,100.0%,Vietnam,106.0,THÀNH CÔNG
+28,NamYCM_img_m8.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,596x442,1,69F104117,83.6%,100.0%,Vietnam,132.5,THÀNH CÔNG
+29,NamYCM_img_testxm1.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,680x455,1,99H77060,88.9%,99.5%,Vietnam,134.6,THÀNH CÔNG
+30,NamYCM_img_testxm2.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,680x455,1,99H77060,89.7%,99.8%,Vietnam,94.6,THÀNH CÔNG
+31,NamYCM_img_xh1.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,3556x823,1,51F97022,81.7%,99.6%,Vietnam,522.5,THÀNH CÔNG
+32,NamYCM_img_xh2.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,1043x242,1,44A04075,91.0%,93.8%,Vietnam,1067.4,THÀNH CÔNG
+33,NamYCM_img_xh3.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,352x81,1,30A12893,92.9%,95.5%,Vietnam,183.4,THÀNH CÔNG
+34,NamYCM_img_xh4.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,317x73,1,10E92115,92.4%,94.8%,Vietnam,163.8,THÀNH CÔNG
+35,NamYCM_img_xh5.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,315x74,1,55A4519,92.5%,63.4%,Vietnam,134.5,THÀNH CÔNG
+36,NamYCM_img_xh5meo.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,417x98,1,75A14519,92.4%,91.9%,Vietnam,165.4,THÀNH CÔNG
+37,NamYCM_img_xm1.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,680x455,0,(Không có),N/A,N/A,N/A,114.5,CHƯA NHẬN DIỆN
+38,NamYCM_img_xm2.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,917x670,0,(Không có),N/A,N/A,N/A,90.2,CHƯA NHẬN DIỆN
+39,NamYCM_img_xm3.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,242x175,0,(Không có),N/A,N/A,N/A,123.5,CHƯA NHẬN DIỆN
+40,NamYCM_img_xm4.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,881x649,1,65X47855,76.2%,99.7%,Vietnam,115.7,THÀNH CÔNG
+41,NamYCM_img_xm5.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,185x133,1,65D138899,64.7%,100.0%,Vietnam,144.8,THÀNH CÔNG
+42,NamYCM_img_xm6.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,628x452,1,64U13872,93.3%,99.9%,Vietnam,159.2,THÀNH CÔNG
+43,NamYCM_img_xm6demo.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,621x447,1,64U13872,93.3%,100.0%,Vietnam,157.7,THÀNH CÔNG
+44,NamYCM_img_xm7.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,763x548,1,64U13872,94.9%,100.0%,Vietnam,159.4,THÀNH CÔNG
+45,NamYCM_img_xm7nho.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,167x125,1,64U13872,42.2%,100.0%,Vietnam,870.4,THÀNH CÔNG
+46,NamYCM_img_xm8.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,586x443,1,69F104117,76.9%,100.0%,Vietnam,904.6,THÀNH CÔNG
+47,NamYCM_img_xm9nho.jpg,NamYCM_img,Ô tô & Xe máy đa góc độ,171x110,1,94E105025,92.0%,99.9%,Vietnam,138.8,THÀNH CÔNG
+48,pthang23_test1.jpg,pthang23,Ảnh test thực tế ô tô VN,1200x630,1,70F166666,92.0%,100.0%,Vietnam,123.6,THÀNH CÔNG
+49,pthang23_test2.jpg,pthang23,Ảnh test thực tế ô tô VN,1024x768,1,51A13883,91.8%,100.0%,Vietnam,125.3,THÀNH CÔNG
+50,pthang23_test3.jpg,pthang23,Ảnh test thực tế ô tô VN,1024x575,2,"35B156789, 35B256789","88.7%, 87.8%","100.0%, 100.0%",Vietnam,183.7,THÀNH CÔNG
+51,pthang23_test4.jpg,pthang23,Ảnh test thực tế ô tô VN,960x789,3,"66B145678, 66V134567, 68B123456","91.8%, 90.1%, 85.2%","100.0%, 100.0%, 100.0%",Vietnam,197.5,THÀNH CÔNG
+52,pthang23_test5.jpg,pthang23,Ảnh test thực tế ô tô VN,500x288,4,"60B456789, 60F222222, 60B555555, 60F201234","89.4%, 87.5%, 85.5%, 72.4%","100.0%, 100.0%, 100.0%, 99.9%",Vietnam,164.2,THÀNH CÔNG
+53,pthang23_test6.jpg,pthang23,Ảnh test thực tế ô tô VN,490x393,2,"29MD100160, 29MD100151","88.7%, 85.8%","97.7%, 99.3%",Vietnam,201.5,THÀNH CÔNG
+54,pthang23_test7.jpg,pthang23,Ảnh test thực tế ô tô VN,960x720,5,"66L87777, 66K19999, 67T28888, 67T29999, 66F79999","86.9%, 86.3%, 80.4%, 73.5%, 65.6%","100.0%, 100.0%, 100.0%, 100.0%, 99.8%",Vietnam,184.2,THÀNH CÔNG
+55,quangnhat185_vietnam_car_rectangle_plate.jpg,quangnhat185,"Biển chuẩn: dài, vuông, xe máy",640x640,1,62A05990,80.3%,100.0%,Vietnam,128.5,THÀNH CÔNG
+56,quangnhat185_vietnam_car_square_plate.jpg,quangnhat185,"Biển chuẩn: dài, vuông, xe máy",960x720,1,88A11886,89.9%,100.0%,Vietnam,145.8,THÀNH CÔNG
+57,quangnhat185_vietnam_motor_plate.jpg,quangnhat185,"Biển chuẩn: dài, vuông, xe máy",500x350,1,29X507777,86.8%,100.0%,Vietnam,1080.8,THÀNH CÔNG
+58,NamYCM_Bike_back_0402.jpg,NamYCM_Bike_back,Camera bãi giữ xe máy,600x450,1,65L100780,87.8%,100.0%,Vietnam,749.1,THÀNH CÔNG
+59,NamYCM_Bike_back_0403.jpg,NamYCM_Bike_back,Camera bãi giữ xe máy,600x450,1,83FD9972,83.8%,100.0%,Vietnam,158.0,THÀNH CÔNG
+60,NamYCM_Bike_back_0404.jpg,NamYCM_Bike_back,Camera bãi giữ xe máy,600x450,1,95T15167,89.6%,100.0%,Vietnam,153.6,THÀNH CÔNG
+61,NamYCM_Bike_back_0405.jpg,NamYCM_Bike_back,Camera bãi giữ xe máy,600x450,1,65H69154,88.7%,100.0%,Vietnam,114.4,THÀNH CÔNG
+62,NamYCM_Bike_back_0406.jpg,NamYCM_Bike_back,Camera bãi giữ xe máy,600x450,1,64F106510,81.8%,100.0%,Vietnam,166.7,THÀNH CÔNG
+63,NamYCM_Bike_back_0407.jpg,NamYCM_Bike_back,Camera bãi giữ xe máy,600x450,1,52Z40569,88.7%,100.0%,Vietnam,163.3,THÀNH CÔNG
+64,NamYCM_Bike_back_0408.jpg,NamYCM_Bike_back,Camera bãi giữ xe máy,600x450,1,65D102972,91.8%,100.0%,Vietnam,123.0,THÀNH CÔNG
+65,NamYCM_Bike_back_0409.jpg,NamYCM_Bike_back,Camera bãi giữ xe máy,600x450,1,83P149268,91.2%,100.0%,Vietnam,162.9,THÀNH CÔNG
+66,NamYCM_Bike_back_0410.jpg,NamYCM_Bike_back,Camera bãi giữ xe máy,600x450,2,"64B120263, 9","86.8%, 84.4%","100.0%, 90.0%","Unknown, Vietnam",114.5,THÀNH CÔNG
+67,NamYCM_Bike_back_0411.jpg,NamYCM_Bike_back,Camera bãi giữ xe máy,600x450,1,65V20206,91.8%,100.0%,Vietnam,136.6,THÀNH CÔNG
+68,NamYCM_Bike_back_0412.jpg,NamYCM_Bike_back,Camera bãi giữ xe máy,600x450,1,67V15283,92.4%,100.0%,Vietnam,136.5,THÀNH CÔNG
+69,NamYCM_Bike_back_0413.jpg,NamYCM_Bike_back,Camera bãi giữ xe máy,600x450,1,65X45189,91.3%,100.0%,Vietnam,145.8,THÀNH CÔNG
+70,NamYCM_Bike_back_0414.jpg,NamYCM_Bike_back,Camera bãi giữ xe máy,600x450,1,65BT17209,91.4%,99.3%,Vietnam,320.3,THÀNH CÔNG
+71,NamYCM_Bike_back_0415.jpg,NamYCM_Bike_back,Camera bãi giữ xe máy,600x450,1,83H96050,89.0%,100.0%,Vietnam,697.9,THÀNH CÔNG
+72,NamYCM_Bike_back_0416.jpg,NamYCM_Bike_back,Camera bãi giữ xe máy,600x450,1,83C106271,86.3%,100.0%,Vietnam,646.7,THÀNH CÔNG
+73,NamYCM_Bike_back_0417.jpg,NamYCM_Bike_back,Camera bãi giữ xe máy,600x450,1,94FK0857,87.6%,100.0%,Vietnam,130.4,THÀNH CÔNG
+74,NamYCM_Bike_back_0418.jpg,NamYCM_Bike_back,Camera bãi giữ xe máy,600x450,1,69C118915,90.5%,100.0%,Vietnam,106.1,THÀNH CÔNG
+75,NamYCM_Bike_back_0419.jpg,NamYCM_Bike_back,Camera bãi giữ xe máy,600x450,1,83C102301,86.4%,100.0%,Vietnam,141.7,THÀNH CÔNG
+76,NamYCM_Bike_back_0420.jpg,NamYCM_Bike_back,Camera bãi giữ xe máy,600x450,1,65X31313,92.5%,100.0%,Vietnam,165.0,THÀNH CÔNG
+77,NamYCM_Bike_back_0421.jpg,NamYCM_Bike_back,Camera bãi giữ xe máy,600x450,1,68V22855,92.0%,100.0%,Vietnam,122.1,THÀNH CÔNG

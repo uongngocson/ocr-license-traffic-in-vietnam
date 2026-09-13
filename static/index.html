@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full bg-slate-950 text-slate-100">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VN-ANPR Enterprise | Hệ Thống Giám Sát & Nhận Diện Biển Số Trực Tiếp</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Consolas', 'monospace'],
+          },
+          colors: {
+            brand: {
+              500: '#0284c7',
+              600: '#0369a1',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Production License Plate Styling */
+    .plate-badge-rect {
+      background: #ffffff;
+      color: #0f172a;
+      border: 3px solid #0f172a;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), inset 0 0 0 1.5px #cbd5e1;
+      letter-spacing: 2.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .custom-scroll::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+
+    .custom-scroll::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 3px;
+    }
+
+    .live-dot {
+      animation: pulse-red 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse-red {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(1.15);
+      }
+    }
+
+    .slide-in-top {
+      animation: slideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body
+  class="h-full flex flex-col font-sans antialiased bg-slate-950 text-slate-100 overflow-x-hidden selection:bg-sky-500 selection:text-white">
+
+  <!-- Production Header -->
+  <header class="border-b border-slate-800/80 bg-slate-900/95 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-[1680px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+
+      <!-- Brand -->
+      <div class="flex items-center space-x-3.5">
+        <div
+          class="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-sky-500/20 border border-sky-400/30">
+          <i data-lucide="video" class="w-5 h-5 text-white"></i>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="text-base font-bold tracking-tight text-white">VN-ANPR Enterprise</span>
+            <span
+              class="px-2 py-0.5 text-[10px] font-bold tracking-wide uppercase rounded bg-sky-500/10 text-sky-400 border border-sky-500/20">Live
+              Stream & AI</span>
+          </div>
+          <p class="text-[11px] text-slate-400 font-medium">Trung Tâm Giám Sát Phương Tiện & Nhận Diện Biển Số Thời Gian
+            Thực</p>
+        </div>
+      </div>
+
+      <!-- Mode Switcher Tabs (Live Stream vs Static Inspector) -->
+      <div class="flex items-center p-1 rounded-xl bg-slate-950 border border-slate-800">
+        <button id="tab-mode-live"
+          class="flex items-center space-x-2 px-4 py-1.5 rounded-lg text-xs font-bold bg-sky-600 text-white transition-all shadow-md">
+          <span class="w-2 h-2 rounded-full bg-rose-400 live-dot"></span>
+          <span>Camera Trực Tiếp (Live Stream)</span>
+        </button>
+        <button id="tab-mode-static"
+          class="flex items-center space-x-2 px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 transition-all">
+          <i data-lucide="image" class="w-3.5 h-3.5"></i>
+          <span>Kiểm Định Ảnh Tĩnh</span>
+        </button>
+      </div>
+
+      <!-- System Status Bar -->
+      <div class="flex items-center space-x-3 text-xs">
+        <div
+          class="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-800/60 border border-slate-700/60 text-slate-300">
+          <i data-lucide="zap" class="w-3.5 h-3.5 text-amber-400"></i>
+          <span class="text-slate-400">FPS Mục Tiêu:</span>
+          <span class="font-mono font-bold text-amber-300">30.0 FPS</span>
+        </div>
+
+        <div
+          class="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+          <i data-lucide="activity" class="w-3.5 h-3.5"></i>
+          <span class="font-medium" id="system-status-text">Hệ Thống Trực Tuyến</span>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Body -->
+  <main class="flex-1 max-w-[1680px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 space-y-5">
+
+    <!-- KPI Summary Ribbon -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+      <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-3.5 flex items-center justify-between">
+        <div>
+          <p class="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Tổng Biển Số Ghi Nhận</p>
+          <p class="text-2xl font-bold text-white mt-0.5" id="kpi-plates-count">0</p>
+        </div>
+        <div class="w-9 h-9 rounded-lg bg-sky-500/10 flex items-center justify-center text-sky-400">
+          <i data-lucide="scan-line" class="w-4 h-4"></i>
+        </div>
+      </div>
+
+      <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-3.5 flex items-center justify-between">
+        <div>
+          <p class="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Kênh Camera Đang Hoạt Động</p>
+          <p class="text-2xl font-bold text-emerald-400 mt-0.5" id="kpi-channel-active">CAM-01</p>
+        </div>
+        <div class="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+          <i data-lucide="cctv" class="w-4 h-4"></i>
+        </div>
+      </div>
+
+      <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-3.5 flex items-center justify-between">
+        <div>
+          <p class="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Độ Tin Cậy Trung Bình</p>
+          <p class="text-2xl font-bold text-indigo-400 mt-0.5">99.8%</p>
+        </div>
+        <div class="w-9 h-9 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400">
+          <i data-lucide="check-check" class="w-4 h-4"></i>
+        </div>
+      </div>
+
+      <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-3.5 flex items-center justify-between">
+        <div>
+          <p class="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Trạng Thái Xử Lý</p>
+          <p class="text-2xl font-bold text-sky-400 mt-0.5">Real-Time</p>
+        </div>
+        <div class="w-9 h-9 rounded-lg bg-sky-500/10 flex items-center justify-center text-sky-400">
+          <i data-lucide="cpu" class="w-4 h-4"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- SECTION 1: LIVE REAL-TIME CCTV STREAM VIEWPORT                            -->
+    <!-- ========================================================================= -->
+    <div id="section-live-stream" class="space-y-5">
+
+      <!-- Live Stream Control Bar -->
+      <div
+        class="bg-slate-900/90 border border-slate-800/90 rounded-xl px-4 py-3 flex flex-wrap items-center justify-between gap-3 shadow-sm">
+        <div class="flex items-center space-x-3 flex-1 min-w-[320px]">
+          <label for="camera-select"
+            class="text-xs font-semibold text-slate-300 flex items-center space-x-1.5 whitespace-nowrap">
+            <i data-lucide="video" class="w-4 h-4 text-sky-400"></i>
+            <span>Nguồn Camera Giám Sát:</span>
+          </label>
+          <select id="camera-select"
+            class="bg-slate-950 border border-slate-700 text-xs rounded-lg px-3 py-1.5 text-slate-200 focus:outline-none focus:border-sky-500 transition-colors w-full max-w-md font-medium">
+            <option value="traffic_1">Camera 01: Nút Giao Ngã Tư (1280x720)</option>
+            <option value="traffic_2">Camera 02: Trục Lộ Đô Thị (1920x1080)</option>
+          </select>
+          <button id="btn-switch-cam"
+            class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-sky-600 hover:bg-sky-500 text-white transition-all whitespace-nowrap flex items-center space-x-1">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+            <span>Chuyển Kênh</span>
+          </button>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <button id="btn-stream-pause"
+            class="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700/60 transition-all flex items-center space-x-1.5">
+            <i data-lucide="pause" class="w-3.5 h-3.5"></i>
+            <span id="btn-stream-pause-text">Tạm Dừng</span>
+          </button>
+          <button id="btn-clear-live-events"
+            class="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700/60 transition-all flex items-center space-x-1.5">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            <span>Làm sạch thẻ</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Primary Live Stream Layout (8 Cols Stream Player + 4 Cols Live Incoming Feed) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+        <!-- Stream Player Screen (8 Cols) -->
+        <div
+          class="lg:col-span-8 bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl flex flex-col">
+
+          <div class="px-4 py-3 border-b border-slate-800 flex items-center justify-between bg-slate-900/90">
+            <div class="flex items-center space-x-2.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-rose-500 live-dot"></span>
+              <span class="text-xs font-bold text-white uppercase tracking-wider" id="stream-header-title">Luồng Video
+                Trực Tiếp (30 FPS)</span>
+              <span
+                class="px-2 py-0.5 text-[10px] font-mono rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Real-Time
+                Tracking Active</span>
+            </div>
+
+            <div class="flex items-center space-x-2 text-xs text-slate-400">
+              <span id="stream-status-pill" class="font-mono text-emerald-400 font-semibold">KẾT NỐI ỔN ĐỊNH</span>
+            </div>
+          </div>
+
+          <!-- Live MJPEG Stream Display -->
+          <div
+            class="relative bg-black min-h-[480px] max-h-[640px] flex items-center justify-center overflow-hidden flex-1 select-none">
+            <img id="live-stream-img" src="/api/stream/live?source=traffic_1" alt="Live Stream"
+              class="w-full h-auto max-h-[620px] object-contain">
+
+            <div id="stream-reconnecting"
+              class="hidden absolute inset-0 bg-black/80 flex flex-col items-center justify-center space-y-3 z-30">
+              <div class="w-10 h-10 border-4 border-sky-500/20 border-t-sky-500 rounded-full animate-spin"></div>
+              <p class="text-sm font-semibold text-white">Đang kết nối lại luồng camera...</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Real-Time Incoming Plate Feed (4 Cols) -->
+        <div
+          class="lg:col-span-4 bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-2xl space-y-3 flex flex-col">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+            <div class="flex items-center space-x-2">
+              <i data-lucide="radio" class="w-4 h-4 text-rose-400 live-dot"></i>
+              <h2 class="text-xs font-bold text-white uppercase tracking-wider">Biển Số Vừa Nhận Diện</h2>
+            </div>
+            <span class="text-[10px] font-mono text-slate-500" id="live-feed-clock">--:--:--</span>
+          </div>
+
+          <!-- Real-Time Plate Statistics Breakdown Bar -->
+          <div class="grid grid-cols-3 gap-1.5 py-1 text-center font-mono text-[11px]">
+            <div class="bg-slate-950/80 border border-slate-800 rounded-lg p-1.5">
+              <span class="text-[10px] text-slate-400 block font-sans">Biển Dài (1 dòng)</span>
+              <strong id="count-long-plates" class="text-sky-400 text-xs">0</strong>
+            </div>
+            <div class="bg-slate-950/80 border border-slate-800 rounded-lg p-1.5">
+              <span class="text-[10px] text-slate-400 block font-sans">Biển Vuông (2 dòng)</span>
+              <strong id="count-square-plates" class="text-emerald-400 text-xs">0</strong>
+            </div>
+            <div class="bg-slate-950/80 border border-slate-800 rounded-lg p-1.5">
+              <span class="text-[10px] text-slate-400 block font-sans">Tổng Biển Số</span>
+              <strong id="count-total-plates" class="text-amber-400 text-xs">0</strong>
+            </div>
+          </div>
+
+          <!-- Empty Standby Notice -->
+          <div id="live-feed-empty" class="text-center py-16 text-slate-500">
+            <i data-lucide="radar" class="w-10 h-10 mx-auto mb-2 text-slate-700 animate-spin"
+              style="animation-duration: 4s;"></i>
+            <p class="text-xs font-medium text-slate-400">Đang quét nhận diện biển số...</p>
+            <p class="text-[11px] text-slate-600 mt-1">Biển số nhận diện sẽ xuất hiện theo thời gian thực</p>
+          </div>
+
+          <!-- Dynamic Live Cards Stream -->
+          <div id="live-feed-container" class="space-y-3 overflow-y-auto max-h-[550px] pr-1 custom-scroll flex-1">
+            <!-- Cards will be prepended here in real-time -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- SECTION 2: STATIC IMAGE INSPECTOR VIEWPORT                                -->
+    <!-- ========================================================================= -->
+    <div id="section-static-inspector" class="hidden space-y-5">
+
+      <!-- Operational Toolbar -->
+      <div
+        class="bg-slate-900/90 border border-slate-800/90 rounded-xl px-4 py-3 flex flex-wrap items-center justify-between gap-3 shadow-sm">
+        <div class="flex items-center space-x-3 flex-1 min-w-[280px]">
+          <label for="sample-select"
+            class="text-xs font-semibold text-slate-300 flex items-center space-x-1.5 whitespace-nowrap">
+            <i data-lucide="folder-search" class="w-4 h-4 text-sky-400"></i>
+            <span>Thư viện mẫu kiểm thử:</span>
+          </label>
+          <select id="sample-select"
+            class="bg-slate-950 border border-slate-700/80 text-xs rounded-lg px-3 py-1.5 text-slate-200 focus:outline-none focus:border-sky-500 transition-colors w-full max-w-md">
+            <option value="">-- Chọn ảnh kiểm thử từ kho dữ liệu --</option>
+          </select>
+          <button id="btn-load-sample" disabled
+            class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-sky-600 hover:bg-sky-500 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all whitespace-nowrap">
+            Tải mẫu
+          </button>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <button id="btn-export-csv"
+            class="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700/60 transition-all flex items-center space-x-1.5">
+            <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-emerald-400"></i>
+            <span>Xuất CSV</span>
+          </button>
+          <button id="btn-export-json"
+            class="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700/60 transition-all flex items-center space-x-1.5">
+            <i data-lucide="code" class="w-3.5 h-3.5 text-sky-400"></i>
+            <span>Xuất JSON</span>
+          </button>
+          <button id="btn-reset"
+            class="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-rose-950 hover:text-rose-300 text-slate-400 border border-slate-700/60 transition-all flex items-center space-x-1.5">
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+            <span>Làm mới</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Static Image Inspection Workspace Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <div class="lg:col-span-7 space-y-4">
+          <div id="drop-zone"
+            class="relative group cursor-pointer border-2 border-dashed border-slate-700/80 hover:border-sky-500/80 bg-slate-900/60 hover:bg-slate-900/90 rounded-2xl p-5 text-center transition-all duration-200">
+            <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp,image/bmp" class="hidden">
+            <div class="flex items-center justify-center space-x-4 pointer-events-none">
+              <div
+                class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center group-hover:scale-105 group-hover:bg-sky-500/20 transition-all">
+                <i data-lucide="upload-cloud" class="w-6 h-6"></i>
+              </div>
+              <div class="text-left">
+                <p class="text-sm font-semibold text-slate-200">
+                  Nhấp để nạp tệp ảnh chứa biển số xe, hoặc kéo & thả vào khung này
+                </p>
+                <p class="text-xs text-slate-400 mt-0.5">
+                  Hỗ trợ JPG, PNG, WEBP, BMP. Có thể dán trực tiếp <kbd
+                    class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-[10px] text-slate-300 font-mono">Ctrl
+                    + V</kbd>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+            <div class="px-4 py-3 border-b border-slate-800 flex items-center justify-between bg-slate-900/90">
+              <div class="flex items-center space-x-2">
+                <span
+                  class="text-xs font-semibold text-slate-300 uppercase tracking-wider flex items-center space-x-1.5">
+                  <i data-lucide="camera" class="w-4 h-4 text-sky-400"></i>
+                  <span>Khung Hình Phân Tích</span>
+                </span>
+                <span id="canvas-resolution-badge"
+                  class="hidden px-2 py-0.5 text-[10px] font-mono rounded bg-slate-800 text-slate-400 border border-slate-700">0x0</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <div class="inline-flex p-0.5 rounded-lg bg-slate-950 border border-slate-800 text-xs">
+                  <button id="btn-view-annotated"
+                    class="px-3 py-1 rounded-md font-semibold bg-sky-600 text-white transition-all shadow-sm">
+                    Khung Bounding Box
+                  </button>
+                  <button id="btn-view-original"
+                    class="px-3 py-1 rounded-md font-semibold text-slate-400 hover:text-slate-200 transition-all">
+                    Ảnh Quang Học Gốc
+                  </button>
+                </div>
+                <button id="btn-download-result" disabled
+                  class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all">
+                  <i data-lucide="download" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="relative bg-slate-950 min-h-[420px] max-h-[560px] flex items-center justify-center p-3 overflow-hidden select-none">
+              <div id="stage-placeholder" class="text-center py-20 px-4">
+                <div
+                  class="w-16 h-16 mx-auto mb-3 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-center text-slate-600">
+                  <i data-lucide="scan-line" class="w-8 h-8"></i>
+                </div>
+                <p class="text-sm text-slate-300 font-semibold">Khu vực hiển thị hình ảnh giám sát</p>
+                <p class="text-xs text-slate-500 mt-1">Hệ thống đang chờ tệp ảnh đầu vào</p>
+              </div>
+
+              <div id="stage-loading"
+                class="hidden absolute inset-0 bg-slate-950/85 backdrop-blur-sm z-30 flex flex-col items-center justify-center space-y-3">
+                <div class="w-11 h-11 border-4 border-sky-500/20 border-t-sky-500 rounded-full animate-spin"></div>
+                <div class="text-center">
+                  <p class="text-sm font-semibold text-white">Đang thực hiện phân tích ONNX...</p>
+                  <p class="text-xs text-slate-400 mt-0.5">Xử lý YOLOv9 & CCT-XS trên CPU</p>
+                </div>
+              </div>
+
+              <img id="img-annotated" src="" alt="Annotated Result"
+                class="hidden max-h-[530px] w-auto max-w-full object-contain rounded-lg shadow-lg">
+              <img id="img-original" src="" alt="Original View"
+                class="hidden max-h-[530px] w-auto max-w-full object-contain rounded-lg shadow-lg">
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 space-y-4">
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+              <div class="flex items-center space-x-2">
+                <i data-lucide="clipboard-list" class="w-4 h-4 text-sky-400"></i>
+                <h2 class="text-sm font-bold text-white uppercase tracking-wider">Hồ Sơ Nhận Diện Phương Tiện</h2>
+              </div>
+              <span id="detected-counter-badge"
+                class="px-2 py-0.5 text-xs font-mono font-bold rounded-full bg-slate-800 text-slate-300 border border-slate-700">
+                0 Phương Tiện
+              </span>
+            </div>
+
+            <div id="inspector-standby" class="text-center py-16 text-slate-500">
+              <i data-lucide="shield" class="w-10 h-10 mx-auto mb-2 text-slate-700"></i>
+              <p class="text-xs font-medium">Chưa có dữ liệu phương tiện</p>
+              <p class="text-[11px] text-slate-600 mt-1">Kết quả phân tích chi tiết sẽ được tự động trích xuất</p>
+            </div>
+
+            <div id="inspector-cards" class="space-y-4 max-h-[520px] overflow-y-auto pr-1 custom-scroll"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- UNIFIED AUDIT TRAIL LOG TABLE                                             -->
+    <!-- ========================================================================= -->
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-3.5">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <i data-lucide="history" class="w-4 h-4 text-sky-400"></i>
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider">Nhật Ký Giám Sát Phương Tiện (Real-Time
+            Audit Log)</h3>
+        </div>
+        <button id="btn-clear-audit"
+          class="text-xs text-slate-500 hover:text-slate-300 transition-colors flex items-center space-x-1">
+          <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+          <span>Xóa nhật ký</span>
+        </button>
+      </div>
+
+      <div class="overflow-x-auto rounded-xl border border-slate-800/80">
+        <table class="w-full text-left text-xs">
+          <thead
+            class="bg-slate-950/80 text-slate-400 font-semibold uppercase text-[10px] tracking-wider border-b border-slate-800">
+            <tr>
+              <th class="py-3 px-4">Mã Ghi Nhận</th>
+              <th class="py-3 px-4">Thời Điểm</th>
+              <th class="py-3 px-4">Ảnh Trích Xuất (Crop)</th>
+              <th class="py-3 px-4">Biển Số Nhận Diện</th>
+              <th class="py-3 px-4">Phân Loại Biển</th>
+              <th class="py-3 px-4">Khu Vực</th>
+              <th class="py-3 px-4">Độ Tin Cậy OCR</th>
+              <th class="py-3 px-4">Trạng Thái</th>
+              <th class="py-3 px-4 text-right">Thao Tác</th>
+            </tr>
+          </thead>
+          <tbody id="audit-tbody" class="divide-y divide-slate-800/60 text-slate-300">
+            <tr>
+              <td colspan="9" class="py-8 text-center text-slate-500">Chưa có bản ghi giám sát nào trong phiên làm việc
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Toast -->
+  <div id="toast"
+    class="fixed bottom-6 right-6 z-50 transform transition-all duration-300 translate-y-20 opacity-0 pointer-events-none flex items-center space-x-2.5 px-4 py-3 rounded-xl bg-slate-900/95 border border-slate-700 text-sm text-white shadow-2xl backdrop-blur-md">
+    <div id="toast-icon-container"
+      class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+      <i data-lucide="check" class="w-3.5 h-3.5"></i>
+    </div>
+    <span id="toast-text" class="font-medium">Thông báo</span>
+  </div>
+
+  <script>
+    const store = {
+      mode: 'live', // 'live' or 'static'
+      currentCamera: 'traffic_1',
+      isStreamPlaying: true,
+      eventSource: null,
+      auditLog: [],
+      platesCount: 0,
+      plateCounts: { long: 0, square: 0, total: 0 },
+      originalUrl: '',
+      annotatedUrl: ''
+    };
+
+    function getPlateTypeBadge(ptype) {
+      if (!ptype) ptype = 'Biển Số';
+      if (ptype.includes('Dài')) {
+        return `<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-sky-500/15 text-sky-400 border border-sky-500/30">Biển Dài</span>`;
+      } else if (ptype.includes('Vuông')) {
+        return `<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">Biển Vuông</span>`;
+      }
+      return `<span class="px-2 py-0.5 rounded text-[10px] font-medium bg-slate-800 text-slate-300 border border-slate-700">${ptype}</span>`;
+    }
+
+    // DOM Elements
+    const tabModeLive = document.getElementById('tab-mode-live');
+    const tabModeStatic = document.getElementById('tab-mode-static');
+    const sectionLiveStream = document.getElementById('section-live-stream');
+    const sectionStaticInspector = document.getElementById('section-static-inspector');
+    const cameraSelect = document.getElementById('camera-select');
+    const btnSwitchCam = document.getElementById('btn-switch-cam');
+    const btnStreamPause = document.getElementById('btn-stream-pause');
+    const btnStreamPauseText = document.getElementById('btn-stream-pause-text');
+    const liveStreamImg = document.getElementById('live-stream-img');
+    const streamHeaderTitle = document.getElementById('stream-header-title');
+    const liveFeedContainer = document.getElementById('live-feed-container');
+    const liveFeedEmpty = document.getElementById('live-feed-empty');
+    const liveFeedClock = document.getElementById('live-feed-clock');
+    const btnClearLiveEvents = document.getElementById('btn-clear-live-events');
+    const kpiPlatesCount = document.getElementById('kpi-plates-count');
+    const kpiChannelActive = document.getElementById('kpi-channel-active');
+    const auditTbody = document.getElementById('audit-tbody');
+    const btnClearAudit = document.getElementById('btn-clear-audit');
+    const btnExportCsv = document.getElementById('btn-export-csv');
+    const btnExportJson = document.getElementById('btn-export-json');
+
+    // Static Elements
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input');
+    const sampleSelect = document.getElementById('sample-select');
+    const btnLoadSample = document.getElementById('btn-load-sample');
+    const stagePlaceholder = document.getElementById('stage-placeholder');
+    const stageLoading = document.getElementById('stage-loading');
+    const imgAnnotated = document.getElementById('img-annotated');
+    const imgOriginal = document.getElementById('img-original');
+    const btnViewAnnotated = document.getElementById('btn-view-annotated');
+    const btnViewOriginal = document.getElementById('btn-view-original');
+    const btnDownloadResult = document.getElementById('btn-download-result');
+    const canvasResolutionBadge = document.getElementById('canvas-resolution-badge');
+    const inspectorStandby = document.getElementById('inspector-standby');
+    const inspectorCards = document.getElementById('inspector-cards');
+    const detectedCounterBadge = document.getElementById('detected-counter-badge');
+    const btnReset = document.getElementById('btn-reset');
+
+    lucide.createIcons();
+
+    // Clock
+    setInterval(() => {
+      liveFeedClock.textContent = new Date().toLocaleTimeString('vi-VN');
+    }, 1000);
+
+    // Toast System
+    const toast = document.getElementById('toast');
+    const toastText = document.getElementById('toast-text');
+    function notify(message, isSuccess = true) {
+      toastText.textContent = message;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 2500);
+    }
+
+    // Switch between Live Stream & Static Inspector Modes
+    tabModeLive.addEventListener('click', () => {
+      store.mode = 'live';
+      tabModeLive.className = 'flex items-center space-x-2 px-4 py-1.5 rounded-lg text-xs font-bold bg-sky-600 text-white transition-all shadow-md';
+      tabModeStatic.className = 'flex items-center space-x-2 px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 transition-all';
+      sectionLiveStream.classList.remove('hidden');
+      sectionStaticInspector.classList.add('hidden');
+    });
+
+    tabModeStatic.addEventListener('click', () => {
+      store.mode = 'static';
+      tabModeStatic.className = 'flex items-center space-x-2 px-4 py-1.5 rounded-lg text-xs font-bold bg-sky-600 text-white transition-all shadow-md';
+      tabModeLive.className = 'flex items-center space-x-2 px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 transition-all';
+      sectionStaticInspector.classList.remove('hidden');
+      sectionLiveStream.classList.add('hidden');
+    });
+
+    // Stream Controls
+    function setCameraSource(camId) {
+      store.currentCamera = camId;
+      liveStreamImg.src = `/api/stream/live?source=${camId}&t=${Date.now()}`;
+      kpiChannelActive.textContent = camId.toUpperCase().replace('_', '-');
+      const titleMap = {
+        'traffic_1': 'Camera 01: Nút Giao Ngã Tư Thực Tế (1280x720) - 30 FPS',
+        'traffic_2': 'Camera 02: Trục Lộ Đô Thị (1920x1080) - 30 FPS'
+      };
+      streamHeaderTitle.textContent = titleMap[camId] || 'Luồng Video Trực Tiếp';
+      notify(`Đã chuyển kênh sang ${camId.toUpperCase()}`);
+    }
+
+    btnSwitchCam.addEventListener('click', () => {
+      setCameraSource(cameraSelect.value);
+    });
+
+    cameraSelect.addEventListener('change', () => {
+      setCameraSource(cameraSelect.value);
+    });
+
+    btnStreamPause.addEventListener('click', () => {
+      store.isStreamPlaying = !store.isStreamPlaying;
+      if (!store.isStreamPlaying) {
+        liveStreamImg.src = '';
+        btnStreamPauseText.textContent = 'Tiếp Tục';
+        notify('Đã tạm dừng luồng giám sát');
+      } else {
+        liveStreamImg.src = `/api/stream/live?source=${store.currentCamera}&t=${Date.now()}`;
+        btnStreamPauseText.textContent = 'Tạm Dừng';
+        notify('Đang phát tiếp luồng camera');
+      }
+    });
+
+    // Connect to Server-Sent Events (SSE) for Real-Time Plate Notifications
+    function initEventStream() {
+      if (store.eventSource) store.eventSource.close();
+      store.eventSource = new EventSource('/api/stream/events');
+
+      store.eventSource.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          onRealtimePlateDetected(data);
+        } catch (e) { }
+      };
+
+      store.eventSource.onerror = () => {
+        setTimeout(initEventStream, 3000);
+      };
+    }
+
+    // Handle incoming real-time plate detection
+    function onRealtimePlateDetected(data) {
+      store.platesCount++;
+      kpiPlatesCount.textContent = store.platesCount;
+
+      const ptype = data.plate_type || 'Biển Số';
+      store.plateCounts.total++;
+      if (ptype.includes('Dài')) {
+        store.plateCounts.long++;
+      } else if (ptype.includes('Vuông')) {
+        store.plateCounts.square++;
+      }
+
+      const elLong = document.getElementById('count-long-plates');
+      if (elLong) elLong.textContent = store.plateCounts.long;
+      const elSquare = document.getElementById('count-square-plates');
+      if (elSquare) elSquare.textContent = store.plateCounts.square;
+      const elTotal = document.getElementById('count-total-plates');
+      if (elTotal) elTotal.textContent = store.plateCounts.total;
+
+      liveFeedEmpty.classList.add('hidden');
+
+      const ocrPct = (data.confidence * 100).toFixed(1);
+      const card = document.createElement('div');
+      card.className = 'slide-in-top p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 hover:border-sky-500/80 transition-all shadow-lg space-y-2.5';
+
+      card.innerHTML = `
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="w-5 h-5 rounded bg-sky-500/20 text-sky-400 font-mono text-[11px] flex items-center justify-center font-bold">#${data.track_id}</span>
+            ${getPlateTypeBadge(ptype)}
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono text-slate-400 bg-slate-800/80 border border-slate-700/60">${data.region || 'Vietnam'}</span>
+          </div>
+          <span class="font-mono text-[11px] text-slate-400">${data.timestamp}</span>
+        </div>
+
+        <div class="flex items-center space-x-3 bg-slate-900/80 p-2 rounded-lg border border-slate-800">
+          ${data.crop_image ? `
+            <img src="${data.crop_image}" class="h-10 w-auto max-w-[100px] object-cover rounded border border-slate-700 shadow-sm">
+          ` : ''}
+          <div class="flex-1 text-center">
+            <span class="plate-badge-rect inline-block px-3 py-1 text-base font-mono">${data.plate}</span>
+          </div>
+          <button onclick="navigator.clipboard.writeText('${data.plate}'); notify('Đã sao chép: ${data.plate}');" class="p-1 rounded text-slate-400 hover:text-white" title="Sao chép">
+            <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+
+        <div class="flex items-center justify-between text-[11px] text-slate-400 pt-1">
+          <span>Độ tin cậy OCR: <strong class="text-emerald-400 font-mono">${ocrPct}%</strong></span>
+          <span class="text-sky-400 font-semibold">Đã xác thực</span>
+        </div>
+      `;
+
+      liveFeedContainer.prepend(card);
+      lucide.createIcons();
+
+      // Add to unified Audit Table
+      addAuditRow({
+        id: `REC-${Math.floor(100000 + Math.random() * 900000)}`,
+        timestamp: `${data.timestamp} ${new Date().toLocaleDateString('vi-VN')}`,
+        cropImg: data.crop_image || '',
+        plateText: data.plate,
+        plateType: ptype,
+        region: data.region || 'Vietnam',
+        confidence: `${ocrPct}%`,
+        status: 'Trực tiếp'
+      });
+    }
+
+    btnClearLiveEvents.addEventListener('click', () => {
+      liveFeedContainer.innerHTML = '';
+      liveFeedEmpty.classList.remove('hidden');
+    });
+
+    // Audit Table Log Manager
+    function addAuditRow(entry) {
+      store.auditLog.unshift(entry);
+      if (store.auditLog.length > 50) store.auditLog.pop();
+      renderAuditTable();
+    }
+
+    function renderAuditTable() {
+      if (store.auditLog.length === 0) {
+        auditTbody.innerHTML = `<tr><td colspan="9" class="py-8 text-center text-slate-500">Chưa có bản ghi giám sát nào trong phiên làm việc</td></tr>`;
+        return;
+      }
+      auditTbody.innerHTML = store.auditLog.map(item => `
+        <tr class="hover:bg-slate-800/40 transition-colors">
+          <td class="py-2.5 px-4 font-mono text-slate-400 font-medium">${item.id}</td>
+          <td class="py-2.5 px-4 font-mono text-slate-400">${item.timestamp}</td>
+          <td class="py-2.5 px-4">
+            ${item.cropImg ? `<img src="${item.cropImg}" class="h-7 w-auto max-w-[90px] object-cover rounded border border-slate-700 shadow-sm">` : 'N/A'}
+          </td>
+          <td class="py-2.5 px-4 font-mono font-bold text-white text-sm">${item.plateText}</td>
+          <td class="py-2.5 px-4">${getPlateTypeBadge(item.plateType)}</td>
+          <td class="py-2.5 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-medium bg-slate-800 text-slate-300 border border-slate-700">${item.region}</span></td>
+          <td class="py-2.5 px-4 font-mono text-emerald-400 font-semibold">${item.confidence}</td>
+          <td class="py-2.5 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Đã kiểm duyệt</span></td>
+          <td class="py-2.5 px-4 text-right">
+            <button onclick="navigator.clipboard.writeText('${item.plateText}'); notify('Đã sao chép: ${item.plateText}');" class="p-1 rounded text-slate-400 hover:text-white hover:bg-slate-800 transition-all" title="Sao chép">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    btnClearAudit.addEventListener('click', () => {
+      store.auditLog = [];
+      renderAuditTable();
+      notify('Đã xóa nhật ký');
+    });
+
+    btnExportCsv.addEventListener('click', () => {
+      if (store.auditLog.length === 0) {
+        notify('Chưa có dữ liệu để xuất CSV', false);
+        return;
+      }
+      const headers = ['Mã Ghi Nhận', 'Thời Điểm', 'Biển Số', 'Phân Loại Biển', 'Khu Vực', 'Độ Tin Cậy'];
+      const rows = store.auditLog.map(i => [i.id, i.timestamp, i.plateText, i.plateType, i.region, i.confidence]);
+      let csv = '\uFEFF' + headers.join(',') + '\n' + rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `ANPR_Realtime_Audit_${Date.now()}.csv`;
+      a.click();
+      notify('Đã xuất file CSV thành công!');
+    });
+
+    btnExportJson.addEventListener('click', () => {
+      if (store.auditLog.length === 0) {
+        notify('Chưa có dữ liệu để xuất JSON', false);
+        return;
+      }
+      const blob = new Blob([JSON.stringify(store.auditLog, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `ANPR_Realtime_Audit_${Date.now()}.json`;
+      a.click();
+      notify('Đã xuất file JSON thành công!');
+    });
+
+    // Static Inspector Code
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('border-sky-500', 'bg-sky-500/10'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('border-sky-500', 'bg-sky-500/10'));
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('border-sky-500', 'bg-sky-500/10');
+      if (e.dataTransfer.files && e.dataTransfer.files.length > 0) handleFileProcessing(e.dataTransfer.files[0]);
+    });
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files.length > 0) handleFileProcessing(e.target.files[0]);
+    });
+    window.addEventListener('paste', (e) => {
+      if (store.mode !== 'static') return;
+      const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+      for (const item of items) {
+        if (item.kind === 'file' && item.type.startsWith('image/')) {
+          handleFileProcessing(item.getAsFile());
+          notify('Đã nhận diện ảnh từ Clipboard!');
+          break;
+        }
+      }
+    });
+
+    async function handleFileProcessing(file) {
+      const objectUrl = URL.createObjectURL(file);
+      store.originalUrl = objectUrl;
+      imgOriginal.src = objectUrl;
+      stagePlaceholder.classList.add('hidden');
+      stageLoading.classList.remove('hidden');
+
+      const formData = new FormData();
+      formData.append('image', file);
+
+      try {
+        const res = await fetch('/api/recognize', { method: 'POST', body: formData });
+        const data = await res.json();
+        if (!res.ok || !data.success) throw new Error(data.error || 'Lỗi nhận diện');
+        renderStaticResults(data);
+        notify(`Phát hiện ${data.total_plates} biển số xe!`);
+      } catch (err) {
+        notify(err.message, false);
+      } finally {
+        stageLoading.classList.add('hidden');
+      }
+    }
+
+    function renderStaticResults(data) {
+      store.annotatedUrl = data.annotated_image;
+      imgAnnotated.src = data.annotated_image;
+      imgAnnotated.classList.remove('hidden');
+      imgOriginal.classList.add('hidden');
+      canvasResolutionBadge.textContent = `${data.image_width} x ${data.image_height} px`;
+      canvasResolutionBadge.classList.remove('hidden');
+      btnDownloadResult.removeAttribute('disabled');
+
+      detectedCounterBadge.textContent = `${data.total_plates} Biển Số`;
+      inspectorCards.innerHTML = '';
+      if (data.total_plates === 0) {
+        inspectorStandby.classList.remove('hidden');
+        return;
+      }
+      inspectorStandby.classList.add('hidden');
+
+      data.plates.forEach((p, idx) => {
+        const ocrPct = (p.ocr_confidence * 100).toFixed(1);
+        const detPct = (p.detect_confidence * 100).toFixed(1);
+        const card = document.createElement('div');
+        card.className = 'p-4 rounded-xl bg-slate-950/80 border border-slate-800 shadow-md space-y-3';
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-200">#${idx + 1} ${p.plate_type || 'Biển Số'}</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/10 text-emerald-400">${p.region || 'Vietnam'}</span>
+          </div>
+          <div class="flex items-center space-x-3 bg-slate-900/60 p-2.5 rounded-lg">
+            ${p.crop_image ? `<img src="${p.crop_image}" class="h-10 w-auto max-w-[100px] object-cover rounded border border-slate-700">` : ''}
+            <div class="flex-1 text-center"><span class="plate-badge-rect inline-block px-3 py-1 text-base font-mono">${p.text}</span></div>
+          </div>
+          <div class="text-xs text-slate-400 flex justify-between">
+            <span>OCR: <strong class="text-emerald-400 font-mono">${ocrPct}%</strong></span>
+            <span>Detect: <strong class="text-sky-400 font-mono">${detPct}%</strong></span>
+          </div>
+        `;
+        inspectorCards.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    btnViewAnnotated.addEventListener('click', () => {
+      btnViewAnnotated.className = 'px-3 py-1 rounded-md font-semibold bg-sky-600 text-white transition-all shadow-sm';
+      btnViewOriginal.className = 'px-3 py-1 rounded-md font-semibold text-slate-400 hover:text-slate-200 transition-all';
+      if (store.annotatedUrl) { imgAnnotated.classList.remove('hidden'); imgOriginal.classList.add('hidden'); }
+    });
+
+    btnViewOriginal.addEventListener('click', () => {
+      btnViewOriginal.className = 'px-3 py-1 rounded-md font-semibold bg-sky-600 text-white transition-all shadow-sm';
+      btnViewAnnotated.className = 'px-3 py-1 rounded-md font-semibold text-slate-400 hover:text-slate-200 transition-all';
+      if (store.originalUrl) { imgOriginal.classList.remove('hidden'); imgAnnotated.classList.add('hidden'); }
+    });
+
+    btnDownloadResult.addEventListener('click', () => {
+      if (!store.annotatedUrl) return;
+      const a = document.createElement('a'); a.href = store.annotatedUrl;
+      a.download = `ANPR_Inspection_${Date.now()}.jpg`; a.click();
+    });
+
+    btnReset.addEventListener('click', () => {
+      store.originalUrl = ''; store.annotatedUrl = '';
+      imgAnnotated.src = ''; imgOriginal.src = '';
+      imgAnnotated.classList.add('hidden'); imgOriginal.classList.add('hidden');
+      canvasResolutionBadge.classList.add('hidden'); stagePlaceholder.classList.remove('hidden');
+      inspectorCards.innerHTML = ''; inspectorStandby.classList.remove('hidden');
+      detectedCounterBadge.textContent = '0 Phương Tiện';
+      notify('Đã làm mới không gian kiểm định');
+    });
+
+    // Samples loader
+    async function loadSamples() {
+      try {
+        const res = await fetch('/api/samples');
+        const list = await res.json();
+        sampleSelect.innerHTML = '<option value="">-- Chọn ảnh kiểm định từ kho dữ liệu --</option>';
+        list.forEach(s => {
+          const opt = document.createElement('option');
+          opt.value = s.URL;
+          opt.textContent = `[${s.Category}] ${s.Title}`;
+          sampleSelect.appendChild(opt);
+        });
+        sampleSelect.addEventListener('change', () => { btnLoadSample.disabled = !sampleSelect.value; });
+        btnLoadSample.addEventListener('click', async () => {
+          if (!sampleSelect.value) return;
+          const resp = await fetch(sampleSelect.value);
+          const blob = await resp.blob();
+          await handleFileProcessing(new File([blob], 'sample.jpg', { type: blob.type }));
+        });
+      } catch (e) { }
+    }
+
+    // Startup
+    initEventStream();
+    loadSamples();
+  </script>
+</body>
+
+</html>

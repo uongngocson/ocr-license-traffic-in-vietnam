@@ -1,0 +1,799 @@
+[
+  {
+    "video_path": "traffic_videos/vietnam_traffic_1.mp4",
+    "total_frames_processed": 150,
+    "total_time_seconds": 7.87,
+    "average_fps": 19.1,
+    "average_frame_latency_ms": 48.95,
+    "average_detector_latency_ms": 49.89,
+    "average_ocr_latency_ms": 8.96,
+    "total_ocr_runs": 52,
+    "total_unique_vehicles_identified": 15,
+    "vehicle_type_breakdown": {
+      "Xe máy": 3,
+      "Ô tô con": 11,
+      "Xe cơ giới": 1
+    },
+    "unique_plates": [
+      {
+        "track_id": 1,
+        "plate": "57GT653",
+        "confidence": 0.5993095636367798,
+        "vehicle_type": "Xe máy",
+        "frame_detected": 65,
+        "sharpness": 1522531.7
+      },
+      {
+        "track_id": 2,
+        "plate": "51G7853",
+        "confidence": 0.7733296811580658,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 69,
+        "sharpness": 1271270.9
+      },
+      {
+        "track_id": 3,
+        "plate": "515553",
+        "confidence": 0.6378574162721634,
+        "vehicle_type": "Xe máy",
+        "frame_detected": 71,
+        "sharpness": 748195.3
+      },
+      {
+        "track_id": 4,
+        "plate": "51G1553",
+        "confidence": 0.6291821017861366,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 73,
+        "sharpness": 745161.1
+      },
+      {
+        "track_id": 6,
+        "plate": "51G05533",
+        "confidence": 0.8199192225933075,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 77,
+        "sharpness": 803794.2
+      },
+      {
+        "track_id": 7,
+        "plate": "51G78593",
+        "confidence": 0.8293554723262787,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 79,
+        "sharpness": 527906.7
+      },
+      {
+        "track_id": 8,
+        "plate": "51G78593",
+        "confidence": 0.9169657111167908,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 81,
+        "sharpness": 831941.9
+      },
+      {
+        "track_id": 9,
+        "plate": "51A9593",
+        "confidence": 0.5971957370638847,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 87,
+        "sharpness": 906050.9
+      },
+      {
+        "track_id": 10,
+        "plate": "54G8559",
+        "confidence": 0.7202330693602562,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 89,
+        "sharpness": 745074.8
+      },
+      {
+        "track_id": 11,
+        "plate": "5G5553",
+        "confidence": 0.741246247291565,
+        "vehicle_type": "Xe máy",
+        "frame_detected": 97,
+        "sharpness": 962555.8
+      },
+      {
+        "track_id": 12,
+        "plate": "51G18593",
+        "confidence": 0.9562119483947754,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 107,
+        "sharpness": 1387364.8
+      },
+      {
+        "track_id": 13,
+        "plate": "51G8599",
+        "confidence": 0.8316638380289078,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 113,
+        "sharpness": 1834955.5
+      },
+      {
+        "track_id": 14,
+        "plate": "51G78593",
+        "confidence": 0.9891560912132263,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 123,
+        "sharpness": 1425846.9
+      },
+      {
+        "track_id": 15,
+        "plate": "51G18593",
+        "confidence": 0.9950565278530121,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 139,
+        "sharpness": 2225847.6
+      },
+      {
+        "track_id": 17,
+        "plate": "99223522",
+        "confidence": 0.47835579961538316,
+        "vehicle_type": "Xe cơ giới",
+        "frame_detected": 145,
+        "sharpness": 688629.8
+      }
+    ],
+    "output_video_path": "traffic_videos/result_traffic_1_annotated.mp4",
+    "test_id": "traffic_test_1",
+    "description": "Camera 1: Nút giao ngã tư thực tế HD (1280x720) 30 FPS"
+  },
+  {
+    "video_path": "traffic_videos/vietnam_traffic_2.mp4",
+    "total_frames_processed": 150,
+    "total_time_seconds": 15.84,
+    "average_fps": 9.5,
+    "average_frame_latency_ms": 96.7,
+    "average_detector_latency_ms": 58.65,
+    "average_ocr_latency_ms": 7.66,
+    "total_ocr_runs": 158,
+    "total_unique_vehicles_identified": 79,
+    "vehicle_type_breakdown": {
+      "Ô tô con": 57,
+      "Xe máy (<50cc)": 1,
+      "Xe tải": 1,
+      "Xe máy": 7,
+      "Xe khách / Bus": 3,
+      "Xe cơ giới": 10
+    },
+    "unique_plates": [
+      {
+        "track_id": 18,
+        "plate": "30H71853",
+        "confidence": 0.9999355256557465,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 1,
+        "sharpness": 4822516.2
+      },
+      {
+        "track_id": 19,
+        "plate": "29DA22702",
+        "confidence": 0.8734227955341339,
+        "vehicle_type": "Xe máy (<50cc)",
+        "frame_detected": 1,
+        "sharpness": 3156196.1
+      },
+      {
+        "track_id": 20,
+        "plate": "30H71853",
+        "confidence": 0.9999121308326722,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 3,
+        "sharpness": 6473229.3
+      },
+      {
+        "track_id": 21,
+        "plate": "30H28444",
+        "confidence": 0.9997421979904175,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 3,
+        "sharpness": 3279603.7
+      },
+      {
+        "track_id": 22,
+        "plate": "30H71853",
+        "confidence": 0.9999168395996094,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 9,
+        "sharpness": 6105085.3
+      },
+      {
+        "track_id": 23,
+        "plate": "30H7844",
+        "confidence": 0.9567042171955109,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 9,
+        "sharpness": 3362854.5
+      },
+      {
+        "track_id": 24,
+        "plate": "30K21625",
+        "confidence": 0.9617237210273742,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 9,
+        "sharpness": 4297395.1
+      },
+      {
+        "track_id": 25,
+        "plate": "29D22702",
+        "confidence": 0.9750464022159576,
+        "vehicle_type": "Xe tải",
+        "frame_detected": 9,
+        "sharpness": 2220820.9
+      },
+      {
+        "track_id": 26,
+        "plate": "30H71853",
+        "confidence": 0.9999177277088165,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 13,
+        "sharpness": 5429634.4
+      },
+      {
+        "track_id": 27,
+        "plate": "30K21625",
+        "confidence": 0.9999647259712219,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 13,
+        "sharpness": 7177073.2
+      },
+      {
+        "track_id": 29,
+        "plate": "30K21625",
+        "confidence": 0.9999528169631958,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 21,
+        "sharpness": 7523389.8
+      },
+      {
+        "track_id": 30,
+        "plate": "30H71853",
+        "confidence": 0.9998154580593109,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 17,
+        "sharpness": 4674577.3
+      },
+      {
+        "track_id": 31,
+        "plate": "30H3344",
+        "confidence": 0.8514723390340805,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 21,
+        "sharpness": 4344788.6
+      },
+      {
+        "track_id": 32,
+        "plate": "30H71853",
+        "confidence": 0.9998039305210114,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 27,
+        "sharpness": 3967300.0
+      },
+      {
+        "track_id": 33,
+        "plate": "29022702",
+        "confidence": 0.8644198268651963,
+        "vehicle_type": "Xe máy",
+        "frame_detected": 25,
+        "sharpness": 1818798.4
+      },
+      {
+        "track_id": 34,
+        "plate": "30H28444",
+        "confidence": 0.9998943746089936,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 27,
+        "sharpness": 3149433.1
+      },
+      {
+        "track_id": 35,
+        "plate": "30K21625",
+        "confidence": 0.9848808825016022,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 29,
+        "sharpness": 6737344.4
+      },
+      {
+        "track_id": 36,
+        "plate": "34B02860",
+        "confidence": 0.9596916556358337,
+        "vehicle_type": "Xe khách / Bus",
+        "frame_detected": 29,
+        "sharpness": 2073136.0
+      },
+      {
+        "track_id": 37,
+        "plate": "30H71853",
+        "confidence": 0.9993756651878357,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 31,
+        "sharpness": 3362920.5
+      },
+      {
+        "track_id": 38,
+        "plate": "30K21625",
+        "confidence": 0.9999250411987305,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 39,
+        "sharpness": 5814557.7
+      },
+      {
+        "track_id": 39,
+        "plate": "30H71853",
+        "confidence": 0.9886180877685546,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 39,
+        "sharpness": 2528376.6
+      },
+      {
+        "track_id": 40,
+        "plate": "62228",
+        "confidence": 0.5134616926312446,
+        "vehicle_type": "Xe máy",
+        "frame_detected": 39,
+        "sharpness": 834914.5
+      },
+      {
+        "track_id": 41,
+        "plate": "30H48444",
+        "confidence": 0.9505526900291443,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 41,
+        "sharpness": 2867581.9
+      },
+      {
+        "track_id": 42,
+        "plate": "30A62970",
+        "confidence": 0.8833411395549774,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 47,
+        "sharpness": 3397477.9
+      },
+      {
+        "track_id": 43,
+        "plate": "50H71853",
+        "confidence": 0.9220565557479858,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 47,
+        "sharpness": 1637055.9
+      },
+      {
+        "track_id": 44,
+        "plate": "62970",
+        "confidence": 0.9994027733802795,
+        "vehicle_type": "Xe cơ giới",
+        "frame_detected": 49,
+        "sharpness": 3437662.1
+      },
+      {
+        "track_id": 45,
+        "plate": "20622125",
+        "confidence": 0.8770777702331543,
+        "vehicle_type": "Xe cơ giới",
+        "frame_detected": 53,
+        "sharpness": 5048980.6
+      },
+      {
+        "track_id": 46,
+        "plate": "30A62970",
+        "confidence": 0.999911117553711,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 51,
+        "sharpness": 2310746.0
+      },
+      {
+        "track_id": 47,
+        "plate": "22",
+        "confidence": 0.6100621342658996,
+        "vehicle_type": "Xe máy",
+        "frame_detected": 51,
+        "sharpness": 774136.1
+      },
+      {
+        "track_id": 48,
+        "plate": "62970",
+        "confidence": 0.988612848520279,
+        "vehicle_type": "Xe cơ giới",
+        "frame_detected": 53,
+        "sharpness": 2712042.7
+      },
+      {
+        "track_id": 49,
+        "plate": "30H71857",
+        "confidence": 0.9229650646448135,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 57,
+        "sharpness": 1646405.5
+      },
+      {
+        "track_id": 50,
+        "plate": "30A62970",
+        "confidence": 0.9999020516872406,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 57,
+        "sharpness": 3710677.4
+      },
+      {
+        "track_id": 51,
+        "plate": "30K21625",
+        "confidence": 0.9998716950416565,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 61,
+        "sharpness": 5042181.4
+      },
+      {
+        "track_id": 52,
+        "plate": "34B02860",
+        "confidence": 0.9994091510772705,
+        "vehicle_type": "Xe khách / Bus",
+        "frame_detected": 57,
+        "sharpness": 1723697.6
+      },
+      {
+        "track_id": 53,
+        "plate": "22970",
+        "confidence": 0.9237256556749344,
+        "vehicle_type": "Xe cơ giới",
+        "frame_detected": 59,
+        "sharpness": 3272824.2
+      },
+      {
+        "track_id": 54,
+        "plate": "30A62970",
+        "confidence": 0.9999529004096985,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 61,
+        "sharpness": 2545330.1
+      },
+      {
+        "track_id": 55,
+        "plate": "30A62970",
+        "confidence": 0.9999403059482574,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 63,
+        "sharpness": 3319928.8
+      },
+      {
+        "track_id": 56,
+        "plate": "30A62970",
+        "confidence": 0.9999435544013977,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 65,
+        "sharpness": 1730593.6
+      },
+      {
+        "track_id": 57,
+        "plate": "62970",
+        "confidence": 0.9940277874469757,
+        "vehicle_type": "Xe cơ giới",
+        "frame_detected": 67,
+        "sharpness": 3299063.3
+      },
+      {
+        "track_id": 58,
+        "plate": "62970",
+        "confidence": 0.9830646932125091,
+        "vehicle_type": "Xe cơ giới",
+        "frame_detected": 69,
+        "sharpness": 2368488.1
+      },
+      {
+        "track_id": 59,
+        "plate": "30A62970",
+        "confidence": 0.9999222815036773,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 71,
+        "sharpness": 3559088.9
+      },
+      {
+        "track_id": 60,
+        "plate": "30F37973",
+        "confidence": 0.9994809091091156,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 73,
+        "sharpness": 4343419.4
+      },
+      {
+        "track_id": 61,
+        "plate": "30A62970",
+        "confidence": 0.9998589813709259,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 73,
+        "sharpness": 3526090.3
+      },
+      {
+        "track_id": 62,
+        "plate": "30F37973",
+        "confidence": 0.9999397575855256,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 81,
+        "sharpness": 4115795.7
+      },
+      {
+        "track_id": 63,
+        "plate": "30A62970",
+        "confidence": 0.9991379022598267,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 77,
+        "sharpness": 3452669.7
+      },
+      {
+        "track_id": 64,
+        "plate": "98A84444",
+        "confidence": 0.9999324083328247,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 79,
+        "sharpness": 8418702.3
+      },
+      {
+        "track_id": 66,
+        "plate": "30A62970",
+        "confidence": 0.9998028814792633,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 81,
+        "sharpness": 2126125.4
+      },
+      {
+        "track_id": 67,
+        "plate": "30K21625",
+        "confidence": 0.9999032378196716,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 85,
+        "sharpness": 3434871.6
+      },
+      {
+        "track_id": 68,
+        "plate": "98A84444",
+        "confidence": 0.999920791387558,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 81,
+        "sharpness": 4567402.2
+      },
+      {
+        "track_id": 69,
+        "plate": "98A84444",
+        "confidence": 0.9999128222465515,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 83,
+        "sharpness": 7539894.2
+      },
+      {
+        "track_id": 70,
+        "plate": "36114411",
+        "confidence": 0.5398163765668869,
+        "vehicle_type": "Xe cơ giới",
+        "frame_detected": 83,
+        "sharpness": 948270.7
+      },
+      {
+        "track_id": 71,
+        "plate": "98A84444",
+        "confidence": 0.9999067425727844,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 85,
+        "sharpness": 5431725.7
+      },
+      {
+        "track_id": 72,
+        "plate": "30A62970",
+        "confidence": 0.972488921880722,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 87,
+        "sharpness": 2457562.5
+      },
+      {
+        "track_id": 73,
+        "plate": "30A62970",
+        "confidence": 0.9960152924060821,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 89,
+        "sharpness": 2134053.4
+      },
+      {
+        "track_id": 74,
+        "plate": "30K21625",
+        "confidence": 0.9983211755752563,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 91,
+        "sharpness": 2640468.2
+      },
+      {
+        "track_id": 75,
+        "plate": "98A84444",
+        "confidence": 0.9999291241168976,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 95,
+        "sharpness": 5774374.4
+      },
+      {
+        "track_id": 76,
+        "plate": "30A12970",
+        "confidence": 0.917563620209694,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 93,
+        "sharpness": 1901322.1
+      },
+      {
+        "track_id": 77,
+        "plate": "98A84444",
+        "confidence": 0.9998945534229279,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 97,
+        "sharpness": 3743132.4
+      },
+      {
+        "track_id": 78,
+        "plate": "30E21625",
+        "confidence": 0.9061357736587524,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 103,
+        "sharpness": 2184372.2
+      },
+      {
+        "track_id": 79,
+        "plate": "30116271",
+        "confidence": 0.5389936596155167,
+        "vehicle_type": "Xe cơ giới",
+        "frame_detected": 103,
+        "sharpness": 1940973.8
+      },
+      {
+        "track_id": 80,
+        "plate": "34B07660",
+        "confidence": 0.7870518088340759,
+        "vehicle_type": "Xe khách / Bus",
+        "frame_detected": 107,
+        "sharpness": 1518962.2
+      },
+      {
+        "track_id": 81,
+        "plate": "98A84444",
+        "confidence": 0.9998653292655945,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 105,
+        "sharpness": 4546635.7
+      },
+      {
+        "track_id": 82,
+        "plate": "30H12370",
+        "confidence": 0.9028832912445068,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 111,
+        "sharpness": 2005469.0
+      },
+      {
+        "track_id": 83,
+        "plate": "50E74229",
+        "confidence": 0.6483721613883973,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 115,
+        "sharpness": 1965988.8
+      },
+      {
+        "track_id": 84,
+        "plate": "2722225",
+        "confidence": 0.5086854562163353,
+        "vehicle_type": "Xe máy",
+        "frame_detected": 111,
+        "sharpness": 905962.5
+      },
+      {
+        "track_id": 85,
+        "plate": "98A84444",
+        "confidence": 0.9995846927165986,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 111,
+        "sharpness": 4829500.9
+      },
+      {
+        "track_id": 86,
+        "plate": "30X17173",
+        "confidence": 0.7451519846916199,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 119,
+        "sharpness": 1418276.8
+      },
+      {
+        "track_id": 87,
+        "plate": "98A84424",
+        "confidence": 0.9983262360095978,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 115,
+        "sharpness": 4102394.7
+      },
+      {
+        "track_id": 88,
+        "plate": "27130204",
+        "confidence": 0.7199048221111297,
+        "vehicle_type": "Xe máy",
+        "frame_detected": 117,
+        "sharpness": 1057658.2
+      },
+      {
+        "track_id": 89,
+        "plate": "3K21G25",
+        "confidence": 0.6518298745155334,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 123,
+        "sharpness": 1386422.0
+      },
+      {
+        "track_id": 90,
+        "plate": "2420204",
+        "confidence": 0.6300017274916172,
+        "vehicle_type": "Xe máy",
+        "frame_detected": 125,
+        "sharpness": 770971.1
+      },
+      {
+        "track_id": 91,
+        "plate": "2910971",
+        "confidence": 0.5163568943738938,
+        "vehicle_type": "Xe cơ giới",
+        "frame_detected": 125,
+        "sharpness": 990729.0
+      },
+      {
+        "track_id": 92,
+        "plate": "17A10013",
+        "confidence": 0.6536931067705154,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 127,
+        "sharpness": 1200613.4
+      },
+      {
+        "track_id": 93,
+        "plate": "30G66473",
+        "confidence": 0.9738258123397827,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 137,
+        "sharpness": 8918646.8
+      },
+      {
+        "track_id": 94,
+        "plate": "2_2",
+        "confidence": 0.6143689408898354,
+        "vehicle_type": "Xe máy",
+        "frame_detected": 135,
+        "sharpness": 523928.9
+      },
+      {
+        "track_id": 95,
+        "plate": "30G66473",
+        "confidence": 0.99979248046875,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 147,
+        "sharpness": 9189735.9
+      },
+      {
+        "track_id": 96,
+        "plate": "34A02981",
+        "confidence": 0.6009548053145408,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 147,
+        "sharpness": 1199021.4
+      },
+      {
+        "track_id": 97,
+        "plate": "30F37973",
+        "confidence": 0.9997392416000366,
+        "vehicle_type": "Ô tô con",
+        "frame_detected": 149,
+        "sharpness": 3098542.9
+      },
+      {
+        "track_id": 98,
+        "plate": "16111",
+        "confidence": 0.7972044110298157,
+        "vehicle_type": "Xe cơ giới",
+        "frame_detected": 149,
+        "sharpness": 917597.6
+      }
+    ],
+    "output_video_path": "traffic_videos/result_traffic_2_annotated.mp4",
+    "test_id": "traffic_test_2",
+    "description": "Camera 2: Trục lộ giao thông đô thị Full-HD (1920x1080) 30 FPS"
+  }
+]
