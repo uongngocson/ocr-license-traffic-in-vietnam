@@ -329,43 +329,6 @@
     <!-- ========================================================================= -->
     <div id="section-static-inspector" class="hidden space-y-5">
 
-      <!-- Operational Toolbar -->
-      <div
-        class="bg-slate-900/90 border border-slate-800/90 rounded-xl px-4 py-3 flex flex-wrap items-center justify-between gap-3 shadow-sm">
-        <div class="flex items-center space-x-3 flex-1 min-w-[280px]">
-          <label for="sample-select"
-            class="text-xs font-semibold text-slate-300 flex items-center space-x-1.5 whitespace-nowrap">
-            <i data-lucide="folder-search" class="w-4 h-4 text-sky-400"></i>
-            <span>Thư viện mẫu kiểm thử:</span>
-          </label>
-          <select id="sample-select"
-            class="bg-slate-950 border border-slate-700/80 text-xs rounded-lg px-3 py-1.5 text-slate-200 focus:outline-none focus:border-sky-500 transition-colors w-full max-w-md">
-            <option value="">-- Chọn ảnh kiểm thử từ kho dữ liệu --</option>
-          </select>
-          <button id="btn-load-sample" disabled
-            class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-sky-600 hover:bg-sky-500 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all whitespace-nowrap">
-            Tải mẫu
-          </button>
-        </div>
-
-        <div class="flex items-center space-x-2">
-          <button id="btn-export-csv"
-            class="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700/60 transition-all flex items-center space-x-1.5">
-            <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-emerald-400"></i>
-            <span>Xuất CSV</span>
-          </button>
-          <button id="btn-export-json"
-            class="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700/60 transition-all flex items-center space-x-1.5">
-            <i data-lucide="code" class="w-3.5 h-3.5 text-sky-400"></i>
-            <span>Xuất JSON</span>
-          </button>
-          <button id="btn-reset"
-            class="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-rose-950 hover:text-rose-300 text-slate-400 border border-slate-700/60 transition-all flex items-center space-x-1.5">
-            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
-            <span>Làm mới</span>
-          </button>
-        </div>
-      </div>
 
       <!-- Static Image Inspection Workspace Grid -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
@@ -414,8 +377,15 @@
                   </button>
                 </div>
                 <button id="btn-download-result" disabled
+                  title="Tải ảnh kết quả"
                   class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all">
                   <i data-lucide="download" class="w-4 h-4"></i>
+                </button>
+                <button id="btn-reset"
+                  title="Làm mới không gian kiểm định"
+                  class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-rose-950 hover:text-rose-300 text-slate-400 border border-slate-700/60 transition-all flex items-center space-x-1 text-xs font-medium">
+                  <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                  <span>Làm mới</span>
                 </button>
               </div>
             </div>
@@ -571,14 +541,10 @@
     const kpiChannelActive = document.getElementById('kpi-channel-active');
     const auditTbody = document.getElementById('audit-tbody');
     const btnClearAudit = document.getElementById('btn-clear-audit');
-    const btnExportCsv = document.getElementById('btn-export-csv');
-    const btnExportJson = document.getElementById('btn-export-json');
 
     // Static Elements
     const dropZone = document.getElementById('drop-zone');
     const fileInput = document.getElementById('file-input');
-    const sampleSelect = document.getElementById('sample-select');
-    const btnLoadSample = document.getElementById('btn-load-sample');
     const stagePlaceholder = document.getElementById('stage-placeholder');
     const stageLoading = document.getElementById('stage-loading');
     const imgAnnotated = document.getElementById('img-annotated');
@@ -795,35 +761,6 @@
       notify('Đã xóa nhật ký');
     });
 
-    btnExportCsv.addEventListener('click', () => {
-      if (store.auditLog.length === 0) {
-        notify('Chưa có dữ liệu để xuất CSV', false);
-        return;
-      }
-      const headers = ['Mã Ghi Nhận', 'Thời Điểm', 'Biển Số', 'Phân Loại Biển', 'Khu Vực', 'Độ Tin Cậy'];
-      const rows = store.auditLog.map(i => [i.id, i.timestamp, i.plateText, i.plateType, i.region, i.confidence]);
-      let csv = '\uFEFF' + headers.join(',') + '\n' + rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n');
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `ANPR_Realtime_Audit_${Date.now()}.csv`;
-      a.click();
-      notify('Đã xuất file CSV thành công!');
-    });
-
-    btnExportJson.addEventListener('click', () => {
-      if (store.auditLog.length === 0) {
-        notify('Chưa có dữ liệu để xuất JSON', false);
-        return;
-      }
-      const blob = new Blob([JSON.stringify(store.auditLog, null, 2)], { type: 'application/json' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `ANPR_Realtime_Audit_${Date.now()}.json`;
-      a.click();
-      notify('Đã xuất file JSON thành công!');
-    });
-
     // Static Inspector Code
     dropZone.addEventListener('click', () => fileInput.click());
     dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('border-sky-500', 'bg-sky-500/10'); });
@@ -940,31 +877,8 @@
       notify('Đã làm mới không gian kiểm định');
     });
 
-    // Samples loader
-    async function loadSamples() {
-      try {
-        const res = await fetch('/api/samples');
-        const list = await res.json();
-        sampleSelect.innerHTML = '<option value="">-- Chọn ảnh kiểm định từ kho dữ liệu --</option>';
-        list.forEach(s => {
-          const opt = document.createElement('option');
-          opt.value = s.URL;
-          opt.textContent = `[${s.Category}] ${s.Title}`;
-          sampleSelect.appendChild(opt);
-        });
-        sampleSelect.addEventListener('change', () => { btnLoadSample.disabled = !sampleSelect.value; });
-        btnLoadSample.addEventListener('click', async () => {
-          if (!sampleSelect.value) return;
-          const resp = await fetch(sampleSelect.value);
-          const blob = await resp.blob();
-          await handleFileProcessing(new File([blob], 'sample.jpg', { type: blob.type }));
-        });
-      } catch (e) { }
-    }
-
     // Startup
     initEventStream();
-    loadSamples();
   </script>
 </body>
 
