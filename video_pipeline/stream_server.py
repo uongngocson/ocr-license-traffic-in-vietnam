@@ -102,6 +102,7 @@ class StreamRequestHandler(BaseHTTPRequestHandler):
             video_map = {
                 "traffic_1": "traffic_videos/vietnam_traffic_1.mp4",
                 "traffic_2": "traffic_videos/vietnam_traffic_2.mp4",
+                "traffic_3": "traffic_videos/vietnam_traffic_3.mp4",
             }
             video_path = video_map.get(source, "traffic_videos/vietnam_traffic_1.mp4")
             if not os.path.exists(video_path):

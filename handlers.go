@@ -324,6 +324,13 @@ func (s *AppServer) HandleVideos(w http.ResponseWriter, r *http.Request) {
 			"fps":         "30.0 FPS",
 			"description": "Trục lộ giao thông đô thị mật độ cao (Camera giám sát làn đường)",
 		},
+		{
+			"id":          "traffic_3",
+			"name":        "Camera 03 - Tuyến Giao Thông Đô Thị (Full-HD)",
+			"resolution":  "1920 x 1080 (Full-HD)",
+			"fps":         "30.0 FPS",
+			"description": "Tuyến giao thông đô thị (Đón đầu xe ô tô, taxi, xe buýt)",
+		},
 	}
 
 	sendJSON(w, http.StatusOK, videos)

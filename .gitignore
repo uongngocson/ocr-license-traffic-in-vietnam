@@ -231,6 +231,7 @@ vn_test_results/
 traffic_videos/*
 !traffic_videos/vietnam_traffic_1.mp4
 !traffic_videos/vietnam_traffic_2.mp4
+!traffic_videos/vietnam_traffic_3.mp4
 !traffic_videos/frame_sample_traffic2.jpg
 
 
